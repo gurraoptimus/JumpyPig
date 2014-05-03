@@ -9,14 +9,14 @@ public final class SpriteManager {
 		private static SpriteManager instance;
 		
 		//SPRITES URL
-		public final String IMG_URL_BLOCK = "/Sprites/block.png";
-		public final String IMG_URL_CLOUD_1 = "/Sprites/cloud_1.png";
-		public final String IMG_URL_CLOUD_2 = "/Sprites/cloud_2.png";
-		public final String IMG_URL_PLATFORM_LEFT = "/Sprites/platform_left.png";
-		public final String IMG_URL_PLATFORM_RIGHT = "/Sprites/platform_right.png";
-		public final String IMG_URL_PLATFORM_TOP = "/Sprites/platform_top.png";
-		public final String IMG_URL_PLATFORM_BOTTOM = "/Sprites/platform_bottom.png";
-		public final String IMG_URL_BACKGROUND = "/background.png";
+		private final String IMG_URL_BLOCK = "/Sprites/block.png";
+		private final String IMG_URL_CLOUD_1 = "/Sprites/cloud_1.png";
+		private final String IMG_URL_CLOUD_2 = "/Sprites/cloud_2.png";
+		private final String IMG_URL_PLATFORM_LEFT = "/Sprites/platform_left.png";
+		private final String IMG_URL_PLATFORM_RIGHT = "/Sprites/platform_right.png";
+		private final String IMG_URL_PLATFORM_TOP = "/Sprites/platform_top.png";
+		private final String IMG_URL_PLATFORM_BOTTOM = "/Sprites/platform_bottom.png";
+		private final String IMG_URL_BACKGROUND = "/background.png";
 		
 		//SPRITES IMAGES
 		public final Image IMAGE_BLOCK;

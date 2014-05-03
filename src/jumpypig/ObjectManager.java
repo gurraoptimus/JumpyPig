@@ -25,7 +25,7 @@ public class ObjectManager {
 		NUMBER_OF_PLATFORMS = 3;
 		PLATFORM_SPEED = 1;
 		NUMBER_OF_CLOUDS = 5;
-		NUMBER_OF_BLOCKS = 0;
+		NUMBER_OF_BLOCKS = 1;
 		
 		platforms = new ArrayList<GameObject>();
 		clouds = new ArrayList<GameObject>();
@@ -61,6 +61,7 @@ public class ObjectManager {
 		platforms.add(new Platform(600, 200, 5));
 		
 		clouds.add(new Cloud(600,20,70));
+		
 	}
 	
 	/**
@@ -98,8 +99,7 @@ public class ObjectManager {
 			
 			//ADD MISSING OBJECTS
 			for(int i=0;i<add;i++) {
-				Block p = new Block();
-				//TODO: CONFIGURE BLOCK (POSITION, SPEED etc.)
+				Block p = new Block(GameFrame.SCREENSIZE.width + rand.nextInt(100), rand.nextInt(100));
 				blocks.add(p);
 			}
 			
@@ -154,6 +154,19 @@ public class ObjectManager {
 		//CORRECT NUMBER OF OBJECTS
 		manageObjects();
 		
+		//UPDATE BLOCKS
+		it = blocks.iterator();
+		while(it.hasNext()) {
+			Block block = (Block) it.next();
+			
+			//MOVE BLOCKS AT SAME SPEED AS PLATFORMS
+			block.moveX(-1*PLATFORM_SPEED);
+			
+			if(!block.isVisible()) {
+				it.remove();
+			}
+		}
+		//END BLOCKS
 	}
 	
 	public void paint(Graphics2D g) {
@@ -169,11 +182,11 @@ public class ObjectManager {
 			clouds.get(i).paint(g);
 		}
 		
-		/*
+		
 		//PAINT BLOCKS
-		for(GameObject block : blocks) {
-			block.paint(g);
-		}*/
+		for(int i = 0; i < blocks.size(); i++) {
+			blocks.get(i).paint(g);
+		}
 		
 	}
 
