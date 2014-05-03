@@ -92,21 +92,18 @@ public class GamePanel extends JPanel implements KeyListener,Runnable {
 	}
 
 	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void keyPressed(KeyEvent e) {
+		getCurrentState().keyPressed(e.getKeyCode());
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void keyReleased(KeyEvent e) {
+		getCurrentState().keyReleased(e.getKeyCode());
 	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void keyTyped(KeyEvent e) {
+		getCurrentState().keyTyped(e.getKeyCode());
 	}
 	
 	
