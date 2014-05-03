@@ -11,8 +11,8 @@ public interface GameObject {
 	public int getY();
 	public int getX();
 	
-	public void moveX(int x);
-	public void moveY(int y);
+	public void moveX(float x);
+	public void moveY(float y);
 	
 	/**
 	 * Is object outside screen?

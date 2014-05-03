@@ -1,8 +1,10 @@
 package jumpypig;
 
+
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 public class ObjectManager {
 	
@@ -15,27 +17,50 @@ public class ObjectManager {
 	private ArrayList<GameObject> clouds;
 	private ArrayList<GameObject> blocks;
 	
+	private Random rand;
+	
 	
 	public ObjectManager() {
 		//INIT.
 		NUMBER_OF_PLATFORMS = 3;
-		PLATFORM_SPEED = 5;
-		NUMBER_OF_CLOUDS = 3;
+		PLATFORM_SPEED = 1;
+		NUMBER_OF_CLOUDS = 5;
 		NUMBER_OF_BLOCKS = 0;
 		
 		platforms = new ArrayList<GameObject>();
 		clouds = new ArrayList<GameObject>();
 		blocks = new ArrayList<GameObject>();
 		
+		rand = new Random();
+		
 		//ADD STARTING OBJECTS
 		initObjects();
 	}
+	
+	public void setNumberOfPlatforms(int n) {
+		NUMBER_OF_PLATFORMS = n;
+	}
+	
+	public void setNumberOfClouds(int n) {
+		NUMBER_OF_CLOUDS = n;
+	}
+	
+	public void setNumberOfBlocks(int n) {
+		NUMBER_OF_BLOCKS = n;
+	}
+	
+	public void setPlatformSpeed(int n) {
+		PLATFORM_SPEED = n;
+	}
+
 	
 	/**
 	 * Add start objects
 	 */
 	private void initObjects() {
 		platforms.add(new Platform(600, 200, 5));
+		
+		clouds.add(new Cloud(600,20,70));
 	}
 	
 	/**
@@ -49,7 +74,7 @@ public class ObjectManager {
 			//ADD MISSING OBJECTS
 			for(int i=0;i<add;i++) {
 				//ADD PLATFORM AFTER LAST ONE
-				Platform p = new Platform(platforms.get(platforms.size()-1).getX() + 300, 250, 2);
+				Platform p = new Platform(platforms.get(platforms.size()-1).getX() + 300, 250, 5);
 				platforms.add(p);
 			}
 			
@@ -61,8 +86,7 @@ public class ObjectManager {
 			
 			//ADD MISSING OBJECTS
 			for(int i=0;i<add;i++) {
-				Cloud p = new Cloud();
-				//TODO: CONFIGURE CLOUD (POSITION, DISTANCE, SPEED etc.)
+				Cloud p = new Cloud(GameFrame.SCREENSIZE.width + rand.nextInt(100),rand.nextInt(100),rand.nextInt(50));
 				clouds.add(p);
 			}
 			
@@ -84,8 +108,8 @@ public class ObjectManager {
 	}
 	
 	//UPDATE ALL OBJECTS
-	public void update(GameView gv) {
-		
+	public void update(PanelView gv) {
+
 		//UPDATE PLATFORMS
 		Iterator<GameObject> it = platforms.iterator();
 		while(it.hasNext()) {
@@ -97,8 +121,35 @@ public class ObjectManager {
 			if(!platform.isVisible()) {
 				it.remove();
 			}
+			
+			//IF NOT DEMO PLAY - CHECK FOR COLLISIONS WITH PLAYER
+			if(gv instanceof GameView) {
+				//TODO: FIX THIS
+				//COLLISION WITH PLAYER
+				/*if(platform.intersecting(gv.getPlayer().getRect())) {
+					gv.getPlayer().stopFalling();
+				}*/
+			}
+			
 		}
 		//END PLATFORMS
+		
+		//UPDATE CLOUDS
+		it = clouds.iterator();
+		while(it.hasNext()) {
+			Cloud cloud = (Cloud) it.next();
+
+			//MOVE CLOUD
+			cloud.moveX(cloud.getSpeed()*-1);
+			
+			//REMOVE IF OUTSIDE
+			if(!cloud.isVisible()) {
+				it.remove();
+			}
+		}
+		//END CLOUDS
+		
+		
 		
 		//CORRECT NUMBER OF OBJECTS
 		manageObjects();
@@ -108,15 +159,17 @@ public class ObjectManager {
 	public void paint(Graphics2D g) {
 		
 		//PAINT PLATFORMS
-		for(GameObject platform : platforms) {
-			platform.paint(g);
+		for(int i=0;i<platforms.size();i++){
+			platforms.get(i).paint(g);
 		}
 		
-		/*PAINT CLOUDS
-		for(GameObject cloud : clouds) {
-			cloud.paint(g);
+		//FIX THIS
+		//PAINT CLOUDS
+		for(int i=0;i<clouds.size();i++){
+			clouds.get(i).paint(g);
 		}
 		
+		/*
 		//PAINT BLOCKS
 		for(GameObject block : blocks) {
 			block.paint(g);

@@ -16,6 +16,7 @@ public final class SpriteManager {
 		public final String IMG_URL_PLATFORM_RIGHT = "/Sprites/platform_right.png";
 		public final String IMG_URL_PLATFORM_TOP = "/Sprites/platform_top.png";
 		public final String IMG_URL_PLATFORM_BOTTOM = "/Sprites/platform_bottom.png";
+		public final String IMG_URL_BACKGROUND = "/background.png";
 		
 		//SPRITES IMAGES
 		public final Image IMAGE_BLOCK;
@@ -25,6 +26,7 @@ public final class SpriteManager {
 		public final Image IMAGE_PLATFORM_RIGHT;
 		public final Image IMAGE_PLATFORM_TOP;
 		public final Image IMAGE_PLATFORM_BOTTOM;
+		public final Image IMAGE_BACKGROUND;
 		
 		private SpriteManager() {
 			//INIT.
@@ -35,6 +37,7 @@ public final class SpriteManager {
 			IMAGE_PLATFORM_RIGHT = new ImageIcon(this.getClass().getResource(IMG_URL_PLATFORM_RIGHT)).getImage();
 			IMAGE_PLATFORM_TOP = new ImageIcon(this.getClass().getResource(IMG_URL_PLATFORM_TOP)).getImage();
 			IMAGE_PLATFORM_BOTTOM = new ImageIcon(this.getClass().getResource(IMG_URL_PLATFORM_BOTTOM)).getImage();
+			IMAGE_BACKGROUND = new ImageIcon(this.getClass().getResource(IMG_URL_BACKGROUND)).getImage();
 		}
 		
 		public static SpriteManager getInstance() {

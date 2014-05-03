@@ -9,8 +9,7 @@ public class Platform implements GameObject{
 	
 	private int posX,posY;
 	private int length;
-	private int pixelWidth;
-	private int pixelHeight;
+
 	
 	/**
 	 * Create new platform at (x,y) with length, length.
@@ -22,10 +21,6 @@ public class Platform implements GameObject{
 		posX = x;
 		posY = y;
 		this.length = length;
-		
-		//Only use getPixelWidth/Height here. Will cause concurrency exception otherwise
-		pixelWidth = getPixelWidth();
-		pixelHeight = getPixelHeight();
 	}
 
 	@Override
@@ -72,7 +67,7 @@ public class Platform implements GameObject{
 	 */
 	@Override
 	public boolean isVisible() {
-		if(posX+pixelWidth <0) {
+		if(posX+getPixelWidth() <0) {
 			return false;
 		}
 		return true;
@@ -80,8 +75,7 @@ public class Platform implements GameObject{
 
 	@Override
 	public boolean intersecting(Rectangle rec) {
-		// TODO Auto-generated method stub
-		return false;
+		return rec.intersects(new Rectangle(posX, posY, getPixelWidth(), getPixelHeight()));
 	}
 
 	@Override
@@ -113,12 +107,12 @@ public class Platform implements GameObject{
 	}
 
 	@Override
-	public void moveX(int x) {
+	public void moveX(float x) {
 		posX += x;
 	}
 
 	@Override
-	public void moveY(int y) {
+	public void moveY(float y) {
 		posY += y;
 	}
 

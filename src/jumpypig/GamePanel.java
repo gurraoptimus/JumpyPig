@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable {
 		currentState = GAME_STATE;
 		
 		//INIT.
-		setBackground(Color.white);
+		setBackground(Color.black);
 		setDoubleBuffered(true);
 		setFocusable(true);
 		

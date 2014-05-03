@@ -1,5 +1,6 @@
 package jumpypig;
 
+import java.awt.Dimension;
 import java.awt.Graphics2D;
 
 
@@ -25,6 +26,7 @@ public class GameView implements PanelView {
 
 	@Override
 	public void paint(Graphics2D g) {
+		g.drawImage(SpriteManager.getInstance().IMAGE_BACKGROUND,0,0,null);
 		player.paint(g);
 		obm.paint(g);
 	}
