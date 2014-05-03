@@ -23,9 +23,9 @@ public class ObjectManager {
 	public ObjectManager() {
 		//INIT.
 		NUMBER_OF_PLATFORMS = 3;
-		PLATFORM_SPEED = 1;
+		PLATFORM_SPEED = 2;
 		NUMBER_OF_CLOUDS = 5;
-		NUMBER_OF_BLOCKS = 1;
+		NUMBER_OF_BLOCKS = 0;
 		
 		platforms = new ArrayList<GameObject>();
 		clouds = new ArrayList<GameObject>();
@@ -58,7 +58,7 @@ public class ObjectManager {
 	 * Add start objects
 	 */
 	private void initObjects() {
-		platforms.add(new Platform(600, 200, 5));
+		platforms.add(new Platform(0, 200, 5));
 		
 		clouds.add(new Cloud(600,20,70));
 		
@@ -75,7 +75,7 @@ public class ObjectManager {
 			//ADD MISSING OBJECTS
 			for(int i=0;i<add;i++) {
 				//ADD PLATFORM AFTER LAST ONE
-				Platform p = new Platform(platforms.get(platforms.size()-1).getX() + 300, 250, 5);
+				Platform p = new Platform(platforms.get(platforms.size()-1).getX() + 300, 250, 1);
 				platforms.add(p);
 			}
 			
@@ -126,9 +126,10 @@ public class ObjectManager {
 			if(gv instanceof GameView) {
 				//TODO: FIX THIS
 				//COLLISION WITH PLAYER
-				/*if(platform.intersecting(gv.getPlayer().getRect())) {
-					gv.getPlayer().stopFalling();
-				}*/
+				if(platform.intersecting(((GameView) gv).getPlayer().getRect())) {
+					((GameView) gv).getPlayer().setY(platform.getY()-((GameView) gv).getPlayer().getHeight());
+					((GameView) gv).getPlayer().stand();
+				}
 			}
 			
 		}

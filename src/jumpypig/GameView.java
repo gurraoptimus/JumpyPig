@@ -1,6 +1,5 @@
 package jumpypig;
 
-import java.awt.Dimension;
 import java.awt.Graphics2D;
 
 
@@ -14,7 +13,7 @@ public class GameView implements PanelView {
 	
 	public GameView(GamePanel parent) {
 		//INIT.
-		player = new Player();
+		player = new Player(50,0);
 		obm = new ObjectManager();
 		parentPanel = parent;
 	}
@@ -39,14 +38,12 @@ public class GameView implements PanelView {
 
 	@Override
 	public void keyPressed(int k) {
-		// TODO Auto-generated method stub
-
+		player.jump();
 	}
 
 	@Override
 	public void keyReleased(int k) {
-		// TODO Auto-generated method stub
-
+		player.fall();
 	}
 
 	@Override
