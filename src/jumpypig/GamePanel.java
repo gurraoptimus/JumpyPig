@@ -32,9 +32,9 @@ public class GamePanel extends JPanel implements KeyListener,Runnable {
 		
 		//ADD STATES
 		states = new ArrayList<PanelView>();
-		states.add(new MenuView());
-		states.add(new GameView());
-		states.add(new HighscoreView());
+		states.add(new MenuView(this));
+		states.add(new GameView(this));
+		states.add(new HighscoreView(this));
 
 	}
 	

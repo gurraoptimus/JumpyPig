@@ -9,5 +9,7 @@ public interface PanelView {
 	public void keyPressed(int k);
 	public void keyReleased(int k);
 	public void keyTyped(int k);
+	public int getHeight();
+	public int getWidth();
 	
 }

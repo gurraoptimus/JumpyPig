@@ -2,18 +2,37 @@ package jumpypig;
 
 import java.awt.Graphics2D;
 
+
 public class GameView implements PanelView {
+	
+	private Player player;
+	private ObjectManager obm;
+	private boolean ingame;
+	private GamePanel parentPanel;
+	
+	
+	public GameView(GamePanel parent) {
+		//INIT.
+		player = new Player();
+		obm = new ObjectManager();
+		parentPanel = parent;
+	}
+	
+	public Player getPlayer() {
+		return player;
+	}
+	
 
 	@Override
 	public void paint(Graphics2D g) {
-		g.drawRect(10, 100, 50, 150);
-
+		player.paint(g);
+		obm.paint(g);
 	}
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-
+		player.update(this);
+		obm.update(this);
 	}
 
 	@Override
@@ -32,6 +51,16 @@ public class GameView implements PanelView {
 	public void keyTyped(int k) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public int getHeight() {
+		return parentPanel.getHeight();
+	}
+
+	@Override
+	public int getWidth() {
+		return parentPanel.getWidth();
 	}
 
 }

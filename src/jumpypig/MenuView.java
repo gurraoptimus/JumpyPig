@@ -4,6 +4,10 @@ import java.awt.Graphics2D;
 
 public class MenuView implements PanelView {
 
+	public MenuView(GamePanel gamePanel) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public void paint(Graphics2D g) {
 		// TODO Auto-generated method stub
