@@ -3,21 +3,31 @@ package jumpypig;
 import java.awt.Graphics2D;
 
 public class MenuView implements PanelView {
-
-	public MenuView(GamePanel gamePanel) {
-		// TODO Auto-generated constructor stub
+	
+	private ObjectManager obm;
+	private GamePanel parentPanel;
+	
+	public MenuView(GamePanel parent) {
+		parentPanel = parent;
 	}
 
 	@Override
 	public void paint(Graphics2D g) {
-		// TODO Auto-generated method stub
-
+		// Paint sprites
+		g.drawImage(SpriteManager.getInstance().IMAGE_BACKGROUND,0,0,null);
+		g.drawImage(SpriteManager.getInstance().IMAGE_LOGO,50,50,null);
+		g.drawImage(SpriteManager.getInstance().IMAGE_STARTBUTTON,200,100,null);
+		g.drawImage(SpriteManager.getInstance().IMAGE_HIGHSCOREBUTTON,200,150,null);
+		g.drawImage(SpriteManager.getInstance().IMAGE_EXITBUTTON,200,200,null);
+		// Paint objects
+		obm.paint(g);
+		
+		
 	}
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-
+		obm.update(this);
 	}
 
 	@Override
@@ -36,6 +46,16 @@ public class MenuView implements PanelView {
 	public void keyTyped(int k) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public int getHeight() {
+		return parentPanel.getHeight();
+	}
+
+	@Override
+	public int getWidth() {
+		return parentPanel.getWidth();
 	}
 
 }

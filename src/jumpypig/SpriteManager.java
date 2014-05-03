@@ -17,6 +17,10 @@ public final class SpriteManager {
 		private final String IMG_URL_PLATFORM_TOP = "/Sprites/platform_top.png";
 		private final String IMG_URL_PLATFORM_BOTTOM = "/Sprites/platform_bottom.png";
 		private final String IMG_URL_BACKGROUND = "/background.png";
+		private final String IMG_URL_LOGO = "/logo.png";
+		private final String IMG_URL_STARTBUTTON = "/start.png";
+		private final String IMG_URL_HIGHSCOREBUTTON = "/highscore.png";
+		private final String IMG_URL_EXITBUTTON = "/exit.png";
 		
 		//SPRITES IMAGES
 		public final Image IMAGE_BLOCK;
@@ -27,6 +31,10 @@ public final class SpriteManager {
 		public final Image IMAGE_PLATFORM_TOP;
 		public final Image IMAGE_PLATFORM_BOTTOM;
 		public final Image IMAGE_BACKGROUND;
+		public final Image IMAGE_LOGO;
+		public final Image IMAGE_STARTBUTTON;
+		public final Image IMAGE_HIGHSCOREBUTTON;
+		public final Image IMAGE_EXITBUTTON;
 		
 		private SpriteManager() {
 			//INIT.
@@ -38,6 +46,10 @@ public final class SpriteManager {
 			IMAGE_PLATFORM_TOP = new ImageIcon(this.getClass().getResource(IMG_URL_PLATFORM_TOP)).getImage();
 			IMAGE_PLATFORM_BOTTOM = new ImageIcon(this.getClass().getResource(IMG_URL_PLATFORM_BOTTOM)).getImage();
 			IMAGE_BACKGROUND = new ImageIcon(this.getClass().getResource(IMG_URL_BACKGROUND)).getImage();
+			IMAGE_LOGO = new ImageIcon(this.getClass().getResource(IMG_URL_LOGO)).getImage();
+			IMAGE_STARTBUTTON = new ImageIcon(this.getClass().getResource(IMG_URL_STARTBUTTON)).getImage();
+			IMAGE_HIGHSCOREBUTTON = new ImageIcon(this.getClass().getResource(IMG_URL_HIGHSCOREBUTTON)).getImage();
+			IMAGE_EXITBUTTON = new ImageIcon(this.getClass().getResource(IMG_URL_EXITBUTTON)).getImage();
 		}
 		
 		public static SpriteManager getInstance() {
