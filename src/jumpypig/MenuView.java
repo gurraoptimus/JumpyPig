@@ -20,22 +20,18 @@ public class MenuView implements PanelView {
 	// Current menu item
 	private int currentItem;
 	
-	// Size
-	private final Dimension size = GameFrame.SCREENSIZE;
-	private int posX,posY;
-	
 	public MenuView(GamePanel parent) {
 		parentPanel = parent;
 		obm = new ObjectManager();
 		// No platforms in menu
 		obm.setNumberOfPlatforms(0);
+		// No of clouds in menu
+		obm.setNumberOfClouds(10);
+		// Max range for clouds to spawn
+		obm.setMaxCloudRange(GameFrame.SCREENSIZE.height);
 		
 		currentItem = 0;
-		
-		// Init position
-		posX = GameFrame.SCREENSIZE.width/2-size.width/2;
-		posY = GameFrame.SCREENSIZE.height/2-size.height/2;
-		
+			
 		// Set menu items
 		menuItems = new ArrayList<Image>();
 		menuItems.add(SpriteManager.getInstance().IMAGE_STARTBUTTON);
@@ -52,16 +48,26 @@ public class MenuView implements PanelView {
 		obm.paint(g);
 		
 		// Paint logo
-		g.drawImage(SpriteManager.getInstance().IMAGE_LOGO,posX + size.width/2 - 300/2, posY + 10, 300 , 300*SpriteManager.getInstance().IMAGE_LOGO.getHeight(null)/SpriteManager.getInstance().IMAGE_LOGO.getWidth(null) , null);
+		g.drawImage(SpriteManager.getInstance().IMAGE_LOGO, 
+				GameFrame.SCREENSIZE.width/2 - SpriteManager.getInstance().IMAGE_LOGO.getWidth(null)/2,
+				10,
+				null);
 		
 		// Paint menu items
 		for(int i=0;i<menuItems.size();i++) {
 			// Paint item
-			g.drawImage(menuItems.get(i),posX + size.width/2 - 30, posY + 200 + 50*i,null);
+			Image item = menuItems.get(i);
+			g.drawImage(item, GameFrame.SCREENSIZE.width/2 - menuItems.get(0).getWidth(null)/2,
+					SpriteManager.getInstance().IMAGE_LOGO.getHeight(null) + 40 + (item.getHeight(null)+20)*i,
+					null);
 			
-			// If item is chosen paint pig
+			//If item is chosen paint pig
 			if(i == currentItem) {
-				g.drawImage(SpriteManager.getInstance().IMAGE_MENUHIGHLIGHT, posX + size.width/2 - 90, posY + 195 + 50*i, 50 , 50*69/76 ,null); 
+				g.drawImage(SpriteManager.getInstance().IMAGE_MENUHIGHLIGHT,
+						GameFrame.SCREENSIZE.width/2 - menuItems.get(0).getWidth(null)/2 - 60,
+						SpriteManager.getInstance().IMAGE_LOGO.getHeight(null) + 30 + (item.getHeight(null)+20)*i,
+						50 , 50*69/76 ,
+						null); 
 			}
 			
 		}

@@ -21,6 +21,7 @@ public class GameView implements PanelView {
 		//INIT.
 		player = new Player(50,0);
 		obm = new ObjectManager();
+		obm.initObjects();
 		parentPanel = parent;
 		
 		STATE = GAME_STATE;
@@ -157,6 +158,8 @@ public class GameView implements PanelView {
 	private void restart() {
 		player = new Player(50,0);
 		obm = new ObjectManager();
+		obm.initObjects();
+		pausemenu = null;
 	}
 
 }

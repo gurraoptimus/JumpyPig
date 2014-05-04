@@ -79,11 +79,13 @@ public class PlatformBlock extends Platform {
 		return new Rectangle(super.getX(), super.getY(), getWidth(), 10);
 	}
 	
-	private int getHeight() {
+	@Override
+	public int getHeight() {
 		return SpriteManager.getInstance().IMAGE_PLATFORMBLOCK.getHeight(null);
 	}
 	
-	private int getWidth() {
+	@Override
+	public int getWidth() {
 		return SpriteManager.getInstance().IMAGE_PLATFORMBLOCK.getWidth(null);
 	}
 
