@@ -27,8 +27,7 @@ public class MenuView implements PanelView {
 	public MenuView(GamePanel parent) {
 		parentPanel = parent;
 		obm = new ObjectManager();
-		// No blocks or platforms in menu
-		obm.setNumberOfBlocks(0);
+		// No platforms in menu
 		obm.setNumberOfPlatforms(0);
 		
 		currentItem = 0;

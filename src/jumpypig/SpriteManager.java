@@ -9,7 +9,7 @@ public final class SpriteManager {
 		private static SpriteManager instance;
 		
 		//SPRITES URL
-		private final String IMG_URL_BLOCK = "/Sprites/block.png";
+		private final String IMG_URL_PLATFORMBLOCK = "/Sprites/block.png";
 		private final String IMG_URL_CLOUD_1 = "/Sprites/cloud_1.png";
 		private final String IMG_URL_CLOUD_2 = "/Sprites/cloud_2.png";
 		private final String IMG_URL_PLATFORM_LEFT = "/Sprites/platform_left.png";
@@ -25,7 +25,7 @@ public final class SpriteManager {
 		private final String IMG_URL_PLATFORMOFDEATH = "/Sprites/platform_of_death.png";
 		
 		//SPRITES IMAGES
-		public final Image IMAGE_BLOCK;
+		public final Image IMAGE_PLATFORMBLOCK;
 		public final Image IMAGE_CLOUD_1;
 		public final Image IMAGE_CLOUD_2;
 		public final Image IMAGE_PLATFORM_LEFT;
@@ -42,7 +42,7 @@ public final class SpriteManager {
 		
 		private SpriteManager() {
 			//INIT.
-			IMAGE_BLOCK = new ImageIcon(this.getClass().getResource(IMG_URL_BLOCK)).getImage();
+			IMAGE_PLATFORMBLOCK = new ImageIcon(this.getClass().getResource(IMG_URL_PLATFORMBLOCK)).getImage();
 			IMAGE_CLOUD_1 = new ImageIcon(this.getClass().getResource(IMG_URL_CLOUD_1)).getImage();
 			IMAGE_CLOUD_2 = new ImageIcon(this.getClass().getResource(IMG_URL_CLOUD_2)).getImage();
 			IMAGE_PLATFORM_LEFT = new ImageIcon(this.getClass().getResource(IMG_URL_PLATFORM_LEFT)).getImage();

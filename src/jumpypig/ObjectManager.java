@@ -2,6 +2,7 @@ package jumpypig;
 
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -11,11 +12,9 @@ public class ObjectManager {
 	private int NUMBER_OF_PLATFORMS;
 	private int PLATFORM_SPEED;
 	private int NUMBER_OF_CLOUDS;
-	private int NUMBER_OF_BLOCKS;
 	
 	private ArrayList<GameObject> platforms;
 	private ArrayList<GameObject> clouds;
-	private ArrayList<GameObject> blocks;
 	
 	private Random rand;
 	
@@ -25,11 +24,9 @@ public class ObjectManager {
 		NUMBER_OF_PLATFORMS = 3;
 		PLATFORM_SPEED = 5;
 		NUMBER_OF_CLOUDS = 5;
-		NUMBER_OF_BLOCKS = 0;
 		
 		platforms = new ArrayList<GameObject>();
 		clouds = new ArrayList<GameObject>();
-		blocks = new ArrayList<GameObject>();
 		
 		rand = new Random();
 		
@@ -43,10 +40,6 @@ public class ObjectManager {
 	
 	public void setNumberOfClouds(int n) {
 		NUMBER_OF_CLOUDS = n;
-	}
-	
-	public void setNumberOfBlocks(int n) {
-		NUMBER_OF_BLOCKS = n;
 	}
 	
 	public void setPlatformSpeed(int n) {
@@ -73,6 +66,9 @@ public class ObjectManager {
 				//ADD PLATFORM AFTER LAST ONE
 				Platform p = new PlatformOfDeath(platforms.get(platforms.size()-1).getX() + 300, 250, 3);
 				platforms.add(p);
+				p = new PlatformBlock(platforms.get(platforms.size()-1).getX() + 300, 150, 3);
+				platforms.add(p);
+				
 			}
 			
 		}
@@ -85,18 +81,6 @@ public class ObjectManager {
 			for(int i=0;i<add;i++) {
 				Cloud p = new Cloud(GameFrame.SCREENSIZE.width + rand.nextInt(100),rand.nextInt(100),rand.nextInt(50));
 				clouds.add(p);
-			}
-			
-		}
-		
-		//CHECK BLOCKS
-		if(NUMBER_OF_BLOCKS > blocks.size()) {
-			int add = NUMBER_OF_BLOCKS - blocks.size();
-			
-			//ADD MISSING OBJECTS
-			for(int i=0;i<add;i++) {
-				Block p = new Block(GameFrame.SCREENSIZE.width + rand.nextInt(100), rand.nextInt(100));
-				blocks.add(p);
 			}
 			
 		}
@@ -126,21 +110,8 @@ public class ObjectManager {
 				if(platform.intersecting(((GameView) gv).getPlayer().getJumpRect())) {
 					collided = true;
 					
-					//If platform of DEATH
-					if(platform instanceof PlatformOfDeath) {
-						System.out.println("DIE");
-						//TODO explode with blood
-					}
-					
-					//If ordinary platform
-					else if(platform instanceof Platform) {
-						//Set pos
-						((GameView) gv).getPlayer().setY(platform.getY()-((GameView) gv).getPlayer().getHeight()+1);
-						//Set standing
-						((GameView) gv).getPlayer().stand();
-					}
-					
-					
+					//Handle collision
+					platform.collidePlayer(((GameView) gv).getPlayer());	
 				}
 				
 			}
@@ -153,7 +124,6 @@ public class ObjectManager {
 				((GameView) gv).getPlayer().setState(Player.FALLING_STATE);
 			}
 		}
-		
 		//END PLATFORMS
 		
 		//UPDATE CLOUDS
@@ -175,20 +145,6 @@ public class ObjectManager {
 		
 		//CORRECT NUMBER OF OBJECTS
 		manageObjects();
-		
-		//UPDATE BLOCKS
-		it = blocks.iterator();
-		while(it.hasNext()) {
-			Block block = (Block) it.next();
-			
-			//MOVE BLOCKS AT SAME SPEED AS PLATFORMS
-			block.moveX(-1*PLATFORM_SPEED);
-			
-			if(!block.isVisible()) {
-				it.remove();
-			}
-		}
-		//END BLOCKS
 	}
 	
 	public void paint(Graphics2D g) {
@@ -198,17 +154,11 @@ public class ObjectManager {
 			platforms.get(i).paint(g);
 		}
 		
-		//FIX THIS
 		//PAINT CLOUDS
 		for(int i=0;i<clouds.size();i++){
 			clouds.get(i).paint(g);
 		}
 		
-		
-		//PAINT BLOCKS
-		for(int i = 0; i < blocks.size(); i++) {
-			blocks.get(i).paint(g);
-		}
 		
 	}
 

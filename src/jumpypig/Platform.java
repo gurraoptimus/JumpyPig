@@ -80,6 +80,17 @@ public class Platform implements GameObject{
 	public boolean intersecting(Rectangle rec) {
 		return rec.intersects(getCollideRect());
 	}
+	
+	/**
+	 * Handle Collision with player
+	 * @param player
+	 */
+	public void collidePlayer(Player player) {
+		//Set pos
+		player.setY(getY() - player.getHeight()+1);
+		//Set standing
+		player.stand();
+	}
 
 	@Override
 	public void paint(Graphics2D g) {
