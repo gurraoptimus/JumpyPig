@@ -13,9 +13,9 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel implements KeyListener,Runnable {
 
 	private final int FPS = 60;
-	private final int MENU_STATE = 0;
-	private final int GAME_STATE = 1;
-	private final int HIGHSCORE_STATE = 2;
+	public static final int MENU_STATE = 0;
+	public static final int GAME_STATE = 1;
+	public static final int HIGHSCORE_STATE = 2;
 	
 	private ArrayList<PanelView> states;
 	private int currentState;
@@ -23,7 +23,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable {
 	public GamePanel() {
 		
 		//FIX
-		currentState = GAME_STATE;
+		currentState = MENU_STATE;
 		
 		//INIT.
 		setBackground(Color.black);
@@ -44,6 +44,10 @@ public class GamePanel extends JPanel implements KeyListener,Runnable {
 	
 	private void update() {
 		getCurrentState().update();
+	}
+	
+	public void switchState(int state){
+		currentState = state;
 	}
 	
 	@Override
