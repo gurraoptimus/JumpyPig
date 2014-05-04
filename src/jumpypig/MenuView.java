@@ -27,13 +27,17 @@ public class MenuView implements PanelView {
 	public MenuView(GamePanel parent) {
 		parentPanel = parent;
 		obm = new ObjectManager();
+		// No blocks or platforms in menu
+		obm.setNumberOfBlocks(0);
+		obm.setNumberOfPlatforms(0);
+		
 		currentItem = 0;
 		
 		// Init position
 		posX = GameFrame.SCREENSIZE.width/2-size.width/2;
 		posY = GameFrame.SCREENSIZE.height/2-size.height/2;
-		// Set menu items
 		
+		// Set menu items
 		menuItems = new ArrayList<Image>();
 		menuItems.add(SpriteManager.getInstance().IMAGE_STARTBUTTON);
 		menuItems.add(SpriteManager.getInstance().IMAGE_HIGHSCOREBUTTON);
