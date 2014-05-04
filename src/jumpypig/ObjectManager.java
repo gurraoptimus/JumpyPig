@@ -23,7 +23,7 @@ public class ObjectManager {
 	public ObjectManager() {
 		//INIT.
 		NUMBER_OF_PLATFORMS = 3;
-		PLATFORM_SPEED = 2;
+		PLATFORM_SPEED = 5;
 		NUMBER_OF_CLOUDS = 5;
 		NUMBER_OF_BLOCKS = 0;
 		
@@ -53,15 +53,11 @@ public class ObjectManager {
 		PLATFORM_SPEED = n;
 	}
 
-	
 	/**
 	 * Add start objects
 	 */
 	private void initObjects() {
-		platforms.add(new Platform(0, 200, 5));
-		
-		clouds.add(new Cloud(600,20,70));
-		
+		platforms.add(new Platform(0, 200, 5));	
 	}
 	
 	/**
@@ -75,7 +71,7 @@ public class ObjectManager {
 			//ADD MISSING OBJECTS
 			for(int i=0;i<add;i++) {
 				//ADD PLATFORM AFTER LAST ONE
-				Platform p = new Platform(platforms.get(platforms.size()-1).getX() + 300, 250, 1);
+				Platform p = new PlatformOfDeath(platforms.get(platforms.size()-1).getX() + 300, 250, 3);
 				platforms.add(p);
 			}
 			
@@ -129,8 +125,22 @@ public class ObjectManager {
 				//COLLISION WITH PLAYER
 				if(platform.intersecting(((GameView) gv).getPlayer().getJumpRect())) {
 					collided = true;
-					((GameView) gv).getPlayer().setY(platform.getY()-((GameView) gv).getPlayer().getHeight()+1);
-					((GameView) gv).getPlayer().stand();
+					
+					//If platform of DEATH
+					if(platform instanceof PlatformOfDeath) {
+						System.out.println("DIE");
+						//TODO explode with blood
+					}
+					
+					//If ordinary platform
+					else if(platform instanceof Platform) {
+						//Set pos
+						((GameView) gv).getPlayer().setY(platform.getY()-((GameView) gv).getPlayer().getHeight()+1);
+						//Set standing
+						((GameView) gv).getPlayer().stand();
+					}
+					
+					
 				}
 				
 			}

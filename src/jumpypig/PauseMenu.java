@@ -11,8 +11,9 @@ public class PauseMenu {
 
 	//Menu items
 	private ArrayList<Image> menuItems;
-	public static final int CONTINUE = 0;
-	public static final int EXIT = 1;
+	public static final int RESUME = 0;
+	public static final int RESTART = 1;
+	public static final int EXIT = 2;
 	
 	//Current menu item
 	private int currentItem;
@@ -29,7 +30,9 @@ public class PauseMenu {
 		
 		//Set menu items
 		menuItems = new ArrayList<Image>();
+		//TODO Fix correct button imgs
 		menuItems.add(SpriteManager.getInstance().IMAGE_STARTBUTTON);
+		menuItems.add(SpriteManager.getInstance().IMAGE_STARTBUTTON); 
 		menuItems.add(SpriteManager.getInstance().IMAGE_EXITBUTTON);
 	}
 	

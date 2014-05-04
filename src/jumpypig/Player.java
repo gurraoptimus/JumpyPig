@@ -1,5 +1,6 @@
 package jumpypig;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
@@ -101,6 +102,7 @@ public class Player {
 		g.setPaint(Color.cyan);
 		g.fill(getJumpRect());
 		*/
+		
 	}
 
 	public void update(GameView gameView) {
@@ -139,7 +141,7 @@ public class Player {
 	public Rectangle getJumpRect() {
 		int margin = -12;
 		int width = getWidth() + margin;
-		int height = 3;
+		int height = 1;
 		return new Rectangle(posX-margin/2, posY+getHeight(), width, height);
 	}
 	

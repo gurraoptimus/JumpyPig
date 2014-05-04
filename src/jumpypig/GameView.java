@@ -96,9 +96,15 @@ public class GameView implements PanelView {
 			//Activate item
 			else if(k == KeyEvent.VK_ENTER) {
 				//If continue
-				if(pausemenu.getItem() == PauseMenu.CONTINUE) {
+				if(pausemenu.getItem() == PauseMenu.RESUME) {
 					unpause();
 				}
+				//If restart
+				else if(pausemenu.getItem() == PauseMenu.RESTART) {
+					unpause();
+					restart();
+				}
+				
 				else if(pausemenu.getItem() == PauseMenu.EXIT) {
 					//TODO: Fix this
 					System.exit(0);
@@ -106,7 +112,6 @@ public class GameView implements PanelView {
 			}
 		}
 		//END PAUSE MENU
-		
 		
 	}
 
@@ -144,6 +149,14 @@ public class GameView implements PanelView {
 	 */
 	private void unpause() {
 		STATE = GAME_STATE;
+	}
+	
+	/**
+	 * Restart the game
+	 */
+	private void restart() {
+		player = new Player(50,0);
+		obm = new ObjectManager();
 	}
 
 }
