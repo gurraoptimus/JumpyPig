@@ -8,7 +8,7 @@ public class Player {
 	public final int JUMPING_STATE = 1;
 	public final int STANDING_STATE = 0;
 	
-	private final float GRAVITY = 0.05f;
+	private final float GRAVITY = 0.2f;
 	
 	private int STATE;
 	private Animation currentAnimation,jumpAnimation,standingAnimation;
@@ -111,9 +111,7 @@ public class Player {
 		
 		
 		//POSITION
-		//if(STATE == JUMPING_STATE) {
-			dy -= GRAVITY;
-		//}
+		dy -= GRAVITY;
 		
 		posY -= dy;
 		posX += dx;
@@ -129,7 +127,7 @@ public class Player {
 	 */
 	public void jump() {
 		if(STATE == STANDING_STATE) {
-			dy = 10;
+			dy = 13;
 			STATE = JUMPING_STATE;
 
 			//ANIMATION

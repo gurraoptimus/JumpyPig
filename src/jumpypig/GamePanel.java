@@ -23,7 +23,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable {
 	public GamePanel() {
 		
 		//FIX
-		currentState = GAME_STATE;
+		currentState = MENU_STATE;
 		
 		//INIT.
 		setBackground(Color.black);

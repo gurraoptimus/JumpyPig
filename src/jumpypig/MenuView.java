@@ -9,6 +9,7 @@ public class MenuView implements PanelView {
 	
 	public MenuView(GamePanel parent) {
 		parentPanel = parent;
+		obm = new ObjectManager();
 	}
 
 	@Override

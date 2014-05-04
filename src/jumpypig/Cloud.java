@@ -107,6 +107,7 @@ public class Cloud implements GameObject {
 		
 		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, getAlpha()));
 		g.drawImage(image, (int) posX,(int) posY, (int) (getPixelWidth()*getScale()), (int) (getPixelHeight()*getScale()), null);
+		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
 	}
 
 }

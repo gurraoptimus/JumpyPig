@@ -18,9 +18,9 @@ public final class SpriteManager {
 		private final String IMG_URL_PLATFORM_BOTTOM = "/Sprites/platform_bottom.png";
 		private final String IMG_URL_BACKGROUND = "/background.png";
 		private final String IMG_URL_LOGO = "/logo.png";
-		private final String IMG_URL_STARTBUTTON = "/start.png";
-		private final String IMG_URL_HIGHSCOREBUTTON = "/highscore.png";
-		private final String IMG_URL_EXITBUTTON = "/exit.png";
+		private final String IMG_URL_STARTBUTTON = "/menu_btn_start.png";
+		private final String IMG_URL_HIGHSCOREBUTTON = "/menu_btn_highscore.png";
+		private final String IMG_URL_EXITBUTTON = "/menu_btn_exit.png";
 		
 		//SPRITES IMAGES
 		public final Image IMAGE_BLOCK;
