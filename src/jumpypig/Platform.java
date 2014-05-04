@@ -73,9 +73,12 @@ public class Platform implements GameObject{
 		return true;
 	}
 
+	/**
+	 * Check if platform is colliding with rec
+	 */
 	@Override
 	public boolean intersecting(Rectangle rec) {
-		return rec.intersects(new Rectangle(posX, posY, getPixelWidth(), getPixelHeight()));
+		return rec.intersects(getCollideRect());
 	}
 
 	@Override
@@ -104,6 +107,10 @@ public class Platform implements GameObject{
 		int rectY = -1 + posY + SpriteManager.getInstance().IMAGE_PLATFORM_TOP.getHeight(null);
 		g.fillRect(rectX,rectY,segmentX-posX-SpriteManager.getInstance().IMAGE_PLATFORM_LEFT.getWidth(null)+1,segmentY-posY-SpriteManager.getInstance().IMAGE_PLATFORM_TOP.getHeight(null)+2);
 		
+		/*DRAW HITBOX
+		g.setPaint(Color.red);
+		g.fill(getCollideRect());
+		*/
 	}
 
 	@Override
@@ -114,6 +121,13 @@ public class Platform implements GameObject{
 	@Override
 	public void moveY(float y) {
 		posY += y;
+	}
+	
+	private Rectangle getCollideRect() {
+		int margin = 30;
+		int width = SpriteManager.getInstance().IMAGE_PLATFORM_TOP.getWidth(null)*length + margin;
+		int height = 3;
+		return new Rectangle(posX-margin/2+SpriteManager.getInstance().IMAGE_PLATFORM_LEFT.getWidth(null), posY, width, height);
 	}
 
 }

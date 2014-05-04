@@ -5,8 +5,9 @@ import java.awt.Rectangle;
 
 public class Player {
 	
-	public final int JUMPING_STATE = 1;
-	public final int STANDING_STATE = 0;
+	public static final int JUMPING_STATE = 1;
+	public static final int STANDING_STATE = 0;
+	public static final int FALLING_STATE = 2;
 	
 	private final float GRAVITY = 0.2f;
 	
@@ -25,8 +26,8 @@ public class Player {
 		posX = x;
 		posY = y;
 		
-		dy = 0;
-		dx = 0;
+		dy = 0.0f;
+		dx = 0.0f;
 		
 		//Set state
 		STATE = JUMPING_STATE;
@@ -95,6 +96,11 @@ public class Player {
 	
 	public void paint(Graphics2D g) {
 		g.drawImage(currentAnimation.getSprite(),posX,posY,null);
+		
+		/*DRAW HITBOX
+		g.setPaint(Color.cyan);
+		g.fill(getJumpRect());
+		*/
 	}
 
 	public void update(GameView gameView) {
@@ -107,19 +113,34 @@ public class Player {
 		
 		//Update animation
 		currentAnimation.update();
-		//END ANIMATION
-		
-		
+		//END ANIMATION	
+
 		//POSITION
 		dy -= GRAVITY;
-		
-		posY -= dy;
+		if(STATE != STANDING_STATE) {
+			posY -= dy;
+		}
 		posX += dx;
-		//END POSITION
+		//END POSITION 
 	}
 	
+	/**
+	 * Get a rectangle representive of player
+	 * @return
+	 */
 	public Rectangle getRect() {
 		return new Rectangle(posX, posY, currentAnimation.getSprite().getWidth(null), currentAnimation.getSprite().getHeight(null));
+	}
+	
+	/**
+	 * Get a jump hitbox for player
+	 * @return
+	 */
+	public Rectangle getJumpRect() {
+		int margin = -12;
+		int width = getWidth() + margin;
+		int height = 3;
+		return new Rectangle(posX-margin/2, posY+getHeight(), width, height);
 	}
 	
 	/**
@@ -127,13 +148,13 @@ public class Player {
 	 */
 	public void jump() {
 		if(STATE == STANDING_STATE) {
+			posY -= getJumpRect().height+1;
 			dy = 13;
 			STATE = JUMPING_STATE;
 
 			//ANIMATION
 			currentAnimation = jumpAnimation;
 			currentAnimation.reset();
-			
 		}
 	}
 	
@@ -142,13 +163,12 @@ public class Player {
 	 */
 	public void stand() {
 		dy = 0;
-		if(STATE == JUMPING_STATE) {
-			STATE = STANDING_STATE;
-			
+		if(STATE != STANDING_STATE) {
 			//ANIMATION
 			currentAnimation = standingAnimation;
 			currentAnimation.reset();
 		}
+		STATE = STANDING_STATE;
 	}
 	
 	/**
@@ -167,5 +187,12 @@ public class Player {
 	public int getState() {
 		return STATE;
 	}
-
+	
+	/**
+	 * Set current state
+	 * @param state
+	 */
+	public void setState(int state) {
+		STATE = state;
+	}
 }

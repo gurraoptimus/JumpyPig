@@ -21,6 +21,7 @@ public final class SpriteManager {
 		private final String IMG_URL_STARTBUTTON = "/menu_btn_start.png";
 		private final String IMG_URL_HIGHSCOREBUTTON = "/menu_btn_highscore.png";
 		private final String IMG_URL_EXITBUTTON = "/menu_btn_exit.png";
+		private final String IMG_URL_MENUHIGHLIGHT = "/Sprites/pig_jumping_4.png";
 		
 		//SPRITES IMAGES
 		public final Image IMAGE_BLOCK;
@@ -35,6 +36,7 @@ public final class SpriteManager {
 		public final Image IMAGE_STARTBUTTON;
 		public final Image IMAGE_HIGHSCOREBUTTON;
 		public final Image IMAGE_EXITBUTTON;
+		public final Image IMAGE_MENUHIGHLIGHT;
 		
 		private SpriteManager() {
 			//INIT.
@@ -50,6 +52,7 @@ public final class SpriteManager {
 			IMAGE_STARTBUTTON = new ImageIcon(this.getClass().getResource(IMG_URL_STARTBUTTON)).getImage();
 			IMAGE_HIGHSCOREBUTTON = new ImageIcon(this.getClass().getResource(IMG_URL_HIGHSCOREBUTTON)).getImage();
 			IMAGE_EXITBUTTON = new ImageIcon(this.getClass().getResource(IMG_URL_EXITBUTTON)).getImage();
+			IMAGE_MENUHIGHLIGHT = new ImageIcon(this.getClass().getResource(IMG_URL_MENUHIGHLIGHT)).getImage();
 		}
 		
 		public static SpriteManager getInstance() {

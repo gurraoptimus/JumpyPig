@@ -104,14 +104,15 @@ public class ObjectManager {
 			}
 			
 		}
-		
 	}
 	
 	//UPDATE ALL OBJECTS
 	public void update(PanelView gv) {
-
+		
 		//UPDATE PLATFORMS
 		Iterator<GameObject> it = platforms.iterator();
+		//Collided with player
+		boolean collided = false;
 		while(it.hasNext()) {
 			Platform platform = (Platform) it.next();
 			
@@ -124,15 +125,25 @@ public class ObjectManager {
 			
 			//IF NOT DEMO PLAY - CHECK FOR COLLISIONS WITH PLAYER
 			if(gv instanceof GameView) {
-				//TODO: FIX THIS
+
 				//COLLISION WITH PLAYER
-				if(platform.intersecting(((GameView) gv).getPlayer().getRect())) {
-					((GameView) gv).getPlayer().setY(platform.getY()-((GameView) gv).getPlayer().getHeight());
+				if(platform.intersecting(((GameView) gv).getPlayer().getJumpRect())) {
+					collided = true;
+					((GameView) gv).getPlayer().setY(platform.getY()-((GameView) gv).getPlayer().getHeight()+1);
 					((GameView) gv).getPlayer().stand();
 				}
+				
 			}
 			
 		}
+		
+		//if in gameplay - change state of player
+		if(gv instanceof GameView) {
+			if(!collided) {
+				((GameView) gv).getPlayer().setState(Player.FALLING_STATE);
+			}
+		}
+		
 		//END PLATFORMS
 		
 		//UPDATE CLOUDS
