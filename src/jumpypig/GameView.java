@@ -16,11 +16,13 @@ public class GameView implements PanelView {
 	private PauseMenu pausemenu;
 	private int STATE;
 	
+	private Score score;
 	
 	public GameView(GamePanel parent) {
 		//INIT.
 		player = new Player(50,0);
 		obm = new ObjectManager();
+		score = new Score();
 		parentPanel = parent;
 		
 		STATE = GAME_STATE;
@@ -43,6 +45,8 @@ public class GameView implements PanelView {
 		obm.paint(g);
 		//Paint player
 		player.paint(g);
+		//Paint score
+		score.paint(g);
 		
 		//Game is paused - paint pause menu
 		if(STATE == PAUSE_STATE) {
@@ -57,6 +61,7 @@ public class GameView implements PanelView {
 		if(STATE != PAUSE_STATE) {
 			obm.update(this);
 			player.update(this);
+			score.update();
 		}
 	}
 
@@ -157,6 +162,7 @@ public class GameView implements PanelView {
 	private void restart() {
 		player = new Player(50,0);
 		obm = new ObjectManager();
+		score = new Score();
 	}
 
 }
