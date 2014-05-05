@@ -3,6 +3,7 @@ package jumpypig;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -57,6 +58,9 @@ public class GamePanel extends JPanel implements KeyListener,Runnable {
 		
 		//GET 2D canvas
 		Graphics2D g2 = (Graphics2D) g;
+		
+		//SET RENDERING HINTS
+		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		
 		//CALL CURRENT STATES PAINT METH.
 		getCurrentState().paint(g2);

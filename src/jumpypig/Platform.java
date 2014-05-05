@@ -61,7 +61,7 @@ public class Platform implements GameObject{
 		int width = SpriteManager.getInstance().IMAGE_PLATFORM_LEFT.getWidth(null);
 		width += SpriteManager.getInstance().IMAGE_PLATFORM_TOP.getWidth(null)*length;
 		width += SpriteManager.getInstance().IMAGE_PLATFORM_RIGHT.getWidth(null);
-		return width;
+		return width-length;
 	}
 	
 	/**
@@ -132,6 +132,7 @@ public class Platform implements GameObject{
 		g.setPaint(Color.red);
 		g.fill(getCollideRect());
 		*/
+		
 	}
 
 	@Override
@@ -146,9 +147,10 @@ public class Platform implements GameObject{
 	
 	private Rectangle getCollideRect() {
 		int margin = 30;
-		int width = SpriteManager.getInstance().IMAGE_PLATFORM_TOP.getWidth(null)*length + margin;
+		int width = SpriteManager.getInstance().IMAGE_PLATFORM_TOP.getWidth(null)*length-length;
 		int height = 10;
-		return new Rectangle(posX-margin/2+SpriteManager.getInstance().IMAGE_PLATFORM_LEFT.getWidth(null), posY, width, height);
+		return new Rectangle(posX + SpriteManager.getInstance().IMAGE_PLATFORM_LEFT.getWidth(null),
+				posY, width, height);
 	}
 
 }
