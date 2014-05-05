@@ -97,13 +97,13 @@ public class GameOverView implements PanelView{
 		// Activate item
 		else if(k == KeyEvent.VK_ENTER){
 			if(getItem() == SUBMITSCORE){
-				parentPanel.switchState(GamePanel.GAME_STATE);
-			}
-			else if(getItem() == PLAYAGAIN){
 				parentPanel.switchState(GamePanel.HIGHSCORE_STATE);
 			}
+			else if(getItem() == PLAYAGAIN){
+				parentPanel.switchState(GamePanel.GAME_STATE);
+			}
 			else if(getItem() == MAINMENU){
-				System.exit(0);
+				parentPanel.switchState(GamePanel.MENU_STATE);;
 			}
 		}
 
