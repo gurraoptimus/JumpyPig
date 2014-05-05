@@ -17,6 +17,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable {
 	public static final int MENU_STATE = 0;
 	public static final int GAME_STATE = 1;
 	public static final int HIGHSCORE_STATE = 2;
+	public static final int GAMEOVER_STATE = 3;
 	
 	private ArrayList<PanelView> states;
 	private int currentState;
@@ -36,6 +37,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable {
 		states.add(new MenuView(this));
 		states.add(new GameView(this));
 		states.add(new HighscoreView(this));
+		states.add(new GameOverView(this));
 
 	}
 	

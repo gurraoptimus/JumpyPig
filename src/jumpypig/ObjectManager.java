@@ -25,7 +25,7 @@ public class ObjectManager {
 	
 	public ObjectManager() {
 		//INIT.
-		NUMBER_OF_PLATFORMS = 3;
+		NUMBER_OF_PLATFORMS = 5;
 		PLATFORM_SPEED = 5;
 		NUMBER_OF_CLOUDS = 5;
 		MAX_CLOUD_RANGE = GameFrame.SCREENSIZE.height/3;
@@ -58,7 +58,7 @@ public class ObjectManager {
 	 * Add start objects
 	 */
 	public void initObjects() {
-		platforms.add(new Platform(0, 200, 20));	
+		platforms.add(new Platform(0, 200, 20));
 	}
 	
 	/**
@@ -73,7 +73,9 @@ public class ObjectManager {
 			for(int i=0;i<add;i++) {
 				Platform prevPlatform = (Platform) platforms.get(platforms.size()-1);
 				//ADD PLATFORM AFTER LAST ONE
-				Platform p = new PlatformOfDeath(GameFrame.SCREENSIZE.width + prevPlatform.getWidth() + 30, prevPlatform.getY(), 4);
+				Platform p = new Platform(prevPlatform.getX() + prevPlatform.getWidth() + 40 + rand.nextInt(300),
+						prevPlatform.getY() - 100 + rand.nextInt(200),
+						1+rand.nextInt(7));
 				platforms.add(p);
 				
 			}

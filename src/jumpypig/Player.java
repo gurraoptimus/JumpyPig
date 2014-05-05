@@ -58,7 +58,7 @@ public class Player {
 				"/Sprites/blood_splat_8.png",
 				"/Sprites/blood_splat_9.png",
 				"/Sprites/blood_splat_10.png",
-				"/Sprites/blood_splat_11.png"}, 10);
+				"/Sprites/blood_splat_11.png"}, 20);
 		
 		//Standing Animation
 		standingAnimation = new Animation(new String[]{"/Sprites/pig_standing_1.png",

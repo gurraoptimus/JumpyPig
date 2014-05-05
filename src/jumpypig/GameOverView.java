@@ -19,7 +19,11 @@ public class GameOverView implements PanelView{
 	// Current game over item
 	private int currentItem;
 	
-	public GameOverView(){
+	
+	public GameOverView(GamePanel parent){
+		//Set parent panel
+		parentPanel = parent;
+		
 		obm = new ObjectManager();
 		// No platforms
 		obm.setNumberOfPlatforms(0);
