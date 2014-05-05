@@ -21,7 +21,7 @@ public class GameView implements PanelView {
 	private int STATE;
 	private ArrayList<MountainBackground> backgrounds;
 	
-	
+	private NotificationManager nm;
 	
 	
 	//MOUNTAIN BACKGROUND
@@ -76,6 +76,7 @@ public class GameView implements PanelView {
 		obm = new ObjectManager();
 		obm.initObjects();
 		score = new Score();
+		nm = new NotificationManager();
 		
 		parentPanel = parent;
 		
@@ -112,7 +113,8 @@ public class GameView implements PanelView {
 		player.paint(g);
 		//Paint score
 		score.paint(g);
-		
+		//Paint notifications
+		nm.paint(g);
 		//Game is paused - paint pause menu
 		if(STATE == PAUSE_STATE) {
 			pausemenu.paint(g);
@@ -127,6 +129,7 @@ public class GameView implements PanelView {
 			obm.update(this);
 			player.update(this);
 			score.update();
+			nm.update();
 			
 			//Update mountain background
 			Iterator<MountainBackground> it = backgrounds.iterator();
@@ -248,6 +251,7 @@ public class GameView implements PanelView {
 		obm.initObjects();
 		pausemenu = null;
 		score = new Score();
+		nm = new NotificationManager();
 	}
 
 }
