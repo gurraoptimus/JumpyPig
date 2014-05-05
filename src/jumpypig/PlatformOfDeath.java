@@ -37,11 +37,13 @@ public class PlatformOfDeath extends Platform {
 		return new Rectangle(super.getX(), super.getY(), width, height);
 	}
 	
-	private int getWidth() {
+	@Override
+	public int getWidth() {
 		return SpriteManager.getInstance().IMAGE_PLATFORMOFDEATH.getWidth(null);
 	}
 	
-	private int getHeight() {
+	@Override
+	public int getHeight() {
 		return SpriteManager.getInstance().IMAGE_PLATFORMOFDEATH.getWidth(null);
 	}
 

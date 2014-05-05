@@ -14,6 +14,9 @@ public interface GameObject {
 	public void moveX(float x);
 	public void moveY(float y);
 	
+	public int getWidth();
+	public int getHeight();
+	
 	/**
 	 * Is object outside screen?
 	 * @return

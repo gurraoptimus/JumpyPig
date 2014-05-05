@@ -43,6 +43,16 @@ public class Platform implements GameObject{
 		return posX;
 	}
 	
+	@Override
+	public int getWidth() {
+		return getPixelWidth();
+	}
+	
+	@Override
+	public int getHeight() {
+		return getPixelHeight();
+	}
+	
 	/**
 	 * Get width of platform in pixels. Only use in constructor. Causing ConcurrencyException otherwise :S
 	 * @return

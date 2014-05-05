@@ -13,6 +13,10 @@ public class ObjectManager {
 	private int PLATFORM_SPEED;
 	private int NUMBER_OF_CLOUDS;
 	
+	private int MAX_CLOUD_RANGE;
+	private int MAX_PLATFORM_RANGE_X;
+	private int MAX_PLATFORM_RANGE_Y;
+	
 	private ArrayList<GameObject> platforms;
 	private ArrayList<GameObject> clouds;
 	
@@ -24,14 +28,14 @@ public class ObjectManager {
 		NUMBER_OF_PLATFORMS = 3;
 		PLATFORM_SPEED = 5;
 		NUMBER_OF_CLOUDS = 5;
+		MAX_CLOUD_RANGE = GameFrame.SCREENSIZE.height/3;
+		MAX_PLATFORM_RANGE_X = 300;
+		MAX_PLATFORM_RANGE_Y = GameFrame.SCREENSIZE.height/2;
 		
 		platforms = new ArrayList<GameObject>();
 		clouds = new ArrayList<GameObject>();
 		
 		rand = new Random();
-		
-		//ADD STARTING OBJECTS
-		initObjects();
 	}
 	
 	public void setNumberOfPlatforms(int n) {
@@ -45,12 +49,16 @@ public class ObjectManager {
 	public void setPlatformSpeed(int n) {
 		PLATFORM_SPEED = n;
 	}
+	
+	public void setMaxCloudRange(int n) {
+		MAX_CLOUD_RANGE = n;
+	}
 
 	/**
 	 * Add start objects
 	 */
-	private void initObjects() {
-		platforms.add(new Platform(0, 200, 5));	
+	public void initObjects() {
+		platforms.add(new Platform(0, 200, 20));	
 	}
 	
 	/**
@@ -58,15 +66,14 @@ public class ObjectManager {
 	 */
 	private void manageObjects() {
 		//CHECK PLATFORMS
-		if(NUMBER_OF_PLATFORMS > platforms.size()) {
+		if(NUMBER_OF_PLATFORMS > platforms.size()) {			
 			int add = NUMBER_OF_PLATFORMS - platforms.size();
 			
 			//ADD MISSING OBJECTS
 			for(int i=0;i<add;i++) {
+				Platform prevPlatform = (Platform) platforms.get(platforms.size()-1);
 				//ADD PLATFORM AFTER LAST ONE
-				Platform p = new PlatformOfDeath(platforms.get(platforms.size()-1).getX() + 300, 250, 3);
-				platforms.add(p);
-				p = new PlatformBlock(platforms.get(platforms.size()-1).getX() + 300, 150, 3);
+				Platform p = new Platform(GameFrame.SCREENSIZE.width + prevPlatform.getWidth() + 30, prevPlatform.getY(), 5);
 				platforms.add(p);
 				
 			}
@@ -79,7 +86,7 @@ public class ObjectManager {
 			
 			//ADD MISSING OBJECTS
 			for(int i=0;i<add;i++) {
-				Cloud p = new Cloud(GameFrame.SCREENSIZE.width + rand.nextInt(100),rand.nextInt(100),rand.nextInt(50));
+				Cloud p = new Cloud(GameFrame.SCREENSIZE.width + rand.nextInt(100),rand.nextInt(MAX_CLOUD_RANGE),rand.nextInt(50));
 				clouds.add(p);
 			}
 			
@@ -149,16 +156,15 @@ public class ObjectManager {
 	
 	public void paint(Graphics2D g) {
 		
-		//PAINT PLATFORMS
-		for(int i=0;i<platforms.size();i++){
-			platforms.get(i).paint(g);
-		}
-		
 		//PAINT CLOUDS
 		for(int i=0;i<clouds.size();i++){
 			clouds.get(i).paint(g);
 		}
-		
+
+		//PAINT PLATFORMS
+		for(int i=0;i<platforms.size();i++){
+			platforms.get(i).paint(g);
+		}
 		
 	}
 
