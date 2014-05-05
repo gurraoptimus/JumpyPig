@@ -13,7 +13,7 @@ public class Player {
 	private final float GRAVITY = 0.2f;
 	
 	private int STATE;
-	private Animation currentAnimation,jumpAnimation,standingAnimation;
+	private Animation currentAnimation,jumpAnimation,standingAnimation,explodeAnimation;
 	private int posX, posY;
 	private float dy, dx;
 	
@@ -46,6 +46,19 @@ public class Player {
 				"/Sprites/pig_jumping_2.png",
 				"/Sprites/pig_jumping_3.png",
 				"/Sprites/pig_jumping_4.png"}, 30);
+		
+		//Explode Animation
+		explodeAnimation = new Animation(new String[]{"/Sprites/blood_splat_1.png",
+				"/Sprites/blood_splat_2.png",
+				"/Sprites/blood_splat_3.png",
+				"/Sprites/blood_splat_4.png",
+				"/Sprites/blood_splat_5.png",
+				"/Sprites/blood_splat_6.png",
+				"/Sprites/blood_splat_7.png",
+				"/Sprites/blood_splat_8.png",
+				"/Sprites/blood_splat_9.png",
+				"/Sprites/blood_splat_10.png",
+				"/Sprites/blood_splat_11.png"}, 10);
 		
 		//Standing Animation
 		standingAnimation = new Animation(new String[]{"/Sprites/pig_standing_1.png",
@@ -184,6 +197,16 @@ public class Player {
 		if(dy > 0) {
 			dy /= 5;
 		}
+	}
+	
+	/**
+	 * Make little piggy explode in blood
+	 */
+	public void explode() {
+		STATE = FALLING_STATE;
+		currentAnimation = explodeAnimation;
+		currentAnimation.reset();
+		
 	}
 	
 	/**

@@ -27,6 +27,11 @@ public class PlatformOfDeath extends Platform {
 	}
 	
 	@Override
+	public void collidePlayer(Player player) {
+		player.explode();
+	}
+	
+	@Override
 	public void paint(Graphics2D g) {
 		g.drawImage(SpriteManager.getInstance().IMAGE_PLATFORMOFDEATH,super.getX(),super.getY(),null);
 	}

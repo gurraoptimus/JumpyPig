@@ -73,7 +73,7 @@ public class ObjectManager {
 			for(int i=0;i<add;i++) {
 				Platform prevPlatform = (Platform) platforms.get(platforms.size()-1);
 				//ADD PLATFORM AFTER LAST ONE
-				Platform p = new Platform(GameFrame.SCREENSIZE.width + prevPlatform.getWidth() + 30, prevPlatform.getY(), 4);
+				Platform p = new PlatformOfDeath(GameFrame.SCREENSIZE.width + prevPlatform.getWidth() + 30, prevPlatform.getY(), 4);
 				platforms.add(p);
 				
 			}
