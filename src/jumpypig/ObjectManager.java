@@ -12,6 +12,7 @@ public class ObjectManager {
 	private int NUMBER_OF_PLATFORMS;
 	private int PLATFORM_SPEED;
 	private int NUMBER_OF_CLOUDS;
+	private int LEVEL;
 	
 	private int MAX_CLOUD_RANGE;
 	private int MAX_PLATFORM_RANGE_X;
@@ -25,6 +26,7 @@ public class ObjectManager {
 	
 	public ObjectManager() {
 		//INIT.
+		LEVEL = 1;
 		NUMBER_OF_PLATFORMS = 5;
 		PLATFORM_SPEED = 5;
 		NUMBER_OF_CLOUDS = 5;

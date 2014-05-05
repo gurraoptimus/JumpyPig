@@ -146,10 +146,10 @@ public class Platform implements GameObject{
 	}
 	
 	private Rectangle getCollideRect() {
-		int margin = 30;
-		int width = SpriteManager.getInstance().IMAGE_PLATFORM_TOP.getWidth(null)*length-length;
+		int margin = 20;
+		int width = SpriteManager.getInstance().IMAGE_PLATFORM_TOP.getWidth(null)*length-length + margin;
 		int height = 10;
-		return new Rectangle(posX + SpriteManager.getInstance().IMAGE_PLATFORM_LEFT.getWidth(null),
+		return new Rectangle(posX - margin/2 + SpriteManager.getInstance().IMAGE_PLATFORM_LEFT.getWidth(null),
 				posY, width, height);
 	}
 
