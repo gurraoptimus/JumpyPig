@@ -21,7 +21,11 @@ public final class SpriteManager {
 		private final String IMG_URL_STARTBUTTON = "/menu_btn_start.png";
 		private final String IMG_URL_HIGHSCOREBUTTON = "/menu_btn_highscore.png";
 		private final String IMG_URL_EXITBUTTON = "/menu_btn_exit.png";
-		private final String IMG_URL_MENUHIGHLIGHT = "/Sprites/pig_jumping_4.png";
+		private final String IMG_URL_RESTARTBUTTON = "/menu_btn_restart.png";
+		private final String IMG_URL_RESUMEBUTTON = "/menu_btn_resume.png";
+		private final String IMG_URL_SUBMITHIGHSCOREBUTTON = "/menu_btn_submit_highscore.png";
+		private final String IMG_URL_MAINMENUBUTTON = "/menu_btn_main_menu.png";
+		private final String IMG_URL_MENUHIGHLIGHT = "/menu_btn_pig.png";
 		private final String IMG_URL_PLATFORMOFDEATH = "/Sprites/platform_of_death.png";
 		private final String IMG_URL_BACKGROUNDMOUNTAIN = "/background_mountain.png";
 		
@@ -38,6 +42,10 @@ public final class SpriteManager {
 		public final Image IMAGE_STARTBUTTON;
 		public final Image IMAGE_HIGHSCOREBUTTON;
 		public final Image IMAGE_EXITBUTTON;
+		public final Image IMAGE_RESTARTBUTTON;
+		public final Image IMAGE_RESUMEBUTTON;
+		public final Image IMAGE_SUBMITHIGHSCOREBUTTON;
+		public final Image IMAGE_MAINMENUBUTTON;
 		public final Image IMAGE_MENUHIGHLIGHT;
 		public final Image IMAGE_PLATFORMOFDEATH;
 		public final Image IMAGE_BACKGROUNDMOUNTAIN;
@@ -59,6 +67,10 @@ public final class SpriteManager {
 			IMAGE_MENUHIGHLIGHT = new ImageIcon(this.getClass().getResource(IMG_URL_MENUHIGHLIGHT)).getImage();
 			IMAGE_PLATFORMOFDEATH = new ImageIcon(this.getClass().getResource(IMG_URL_PLATFORMOFDEATH)).getImage();
 			IMAGE_BACKGROUNDMOUNTAIN = new ImageIcon(this.getClass().getResource(IMG_URL_BACKGROUNDMOUNTAIN)).getImage();
+			IMAGE_RESTARTBUTTON = new ImageIcon(this.getClass().getResource(IMG_URL_RESTARTBUTTON)).getImage();
+			IMAGE_RESUMEBUTTON = new ImageIcon(this.getClass().getResource(IMG_URL_RESUMEBUTTON)).getImage();
+			IMAGE_SUBMITHIGHSCOREBUTTON = new ImageIcon(this.getClass().getResource(IMG_URL_SUBMITHIGHSCOREBUTTON)).getImage();
+			IMAGE_MAINMENUBUTTON = new ImageIcon(this.getClass().getResource(IMG_URL_MAINMENUBUTTON)).getImage();
 		}
 		
 		public static SpriteManager getInstance() {

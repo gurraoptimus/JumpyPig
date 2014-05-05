@@ -224,4 +224,15 @@ public class Player {
 	public void setState(int state) {
 		STATE = state;
 	}
+	
+	/**
+	 * returns true if player is outside frame
+	 */
+	public boolean isDead() {
+		//Check if is on screen
+		if(posX + currentAnimation.getSprite().getWidth(null) < 0 || posY > GameFrame.SCREENSIZE.height + 100) {
+			return true;
+		}
+		return false;
+	}
 }

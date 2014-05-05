@@ -11,7 +11,10 @@ public class GameView implements PanelView {
 	
 	private final int GAME_STATE = 0;
 	private final int PAUSE_STATE = 1;
-	private final int GAME_OVER_STATE = 2;
+	
+	//LEVELS
+	private final int[] LEVEL_LIMITS = new int[]{30,70,100};
+	
 	
 	private Player player;
 	private ObjectManager obm;
@@ -148,6 +151,24 @@ public class GameView implements PanelView {
 			}
 			//End backgrounds
 			
+			//Check if player died - change view to game over
+			if(player.isDead()) {
+				//Reset view in case player wants to play again
+				restart();
+				//Switch view
+				parentPanel.switchState(GamePanel.GAMEOVER_STATE);
+			}
+			//end player
+			
+			//Update game level
+			for(int i=0;i<LEVEL_LIMITS.length;i++) {
+				//if score is bigger than limit - upgrade
+				if(score.getScore() > LEVEL_LIMITS[i]) {
+					obm.setLevel(i+1);
+				}
+			}
+			//end level
+			
 		}
 	}
 
@@ -196,9 +217,8 @@ public class GameView implements PanelView {
 					restart();
 				}
 				
-				else if(pausemenu.getItem() == PauseMenu.EXIT) {
-					//TODO: Fix this
-					System.exit(0);
+				else if(pausemenu.getItem() == PauseMenu.MAINMENU) {
+					parentPanel.switchState(GamePanel.MENU_STATE);
 				}
 			}
 		}

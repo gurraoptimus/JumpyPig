@@ -60,4 +60,11 @@ public class Score {
 		}
 		*/
 	}
+	/**
+	 * Return currentScore
+	 * @return
+	 */
+	public int getScore() {
+		return (int) score;
+	}
 }

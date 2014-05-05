@@ -13,7 +13,7 @@ public class PauseMenu {
 	private ArrayList<Image> menuItems;
 	public static final int RESUME = 0;
 	public static final int RESTART = 1;
-	public static final int EXIT = 2;
+	public static final int MAINMENU = 2;
 	
 	//Current menu item
 	private int currentItem;
@@ -31,9 +31,9 @@ public class PauseMenu {
 		//Set menu items
 		menuItems = new ArrayList<Image>();
 		//TODO Fix correct button imgs
-		menuItems.add(SpriteManager.getInstance().IMAGE_STARTBUTTON);
-		menuItems.add(SpriteManager.getInstance().IMAGE_STARTBUTTON); 
-		menuItems.add(SpriteManager.getInstance().IMAGE_EXITBUTTON);
+		menuItems.add(SpriteManager.getInstance().IMAGE_RESUMEBUTTON);
+		menuItems.add(SpriteManager.getInstance().IMAGE_RESTARTBUTTON); 
+		menuItems.add(SpriteManager.getInstance().IMAGE_MAINMENUBUTTON);
 	}
 	
 	public void paint(Graphics2D g) {
@@ -53,7 +53,7 @@ public class PauseMenu {
 			
 			//if item is choosen praint pig
 			if(i == currentItem) {
-				g.drawImage(SpriteManager.getInstance().IMAGE_MENUHIGHLIGHT, posX + size.width/2 - 90, posY + 195 + 50*i, 50 , 50*69/76 ,null); 
+				g.drawImage(SpriteManager.getInstance().IMAGE_MENUHIGHLIGHT, posX + size.width/2 - 90, posY + 195 + 50*i, null); 
 			}
 			
 		}

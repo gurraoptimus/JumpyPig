@@ -13,7 +13,7 @@ public class GameOverView implements PanelView{
 	// Game Over items
 	private ArrayList<Image> gameOverItems;
 	public static final int SUBMITSCORE = 0;
-	public static final int PLAYAGAIN = 1;
+	public static final int RESTART = 1;
 	public static final int MAINMENU = 2;
 	
 	// Current game over item
@@ -35,9 +35,9 @@ public class GameOverView implements PanelView{
 		currentItem = 0;
 		
 		gameOverItems = new ArrayList<Image>();
-		gameOverItems.add(SpriteManager.getInstance().IMAGE_STARTBUTTON);
-		gameOverItems.add(SpriteManager.getInstance().IMAGE_STARTBUTTON);
-		gameOverItems.add(SpriteManager.getInstance().IMAGE_STARTBUTTON);
+		gameOverItems.add(SpriteManager.getInstance().IMAGE_SUBMITHIGHSCOREBUTTON);
+		gameOverItems.add(SpriteManager.getInstance().IMAGE_RESTARTBUTTON);
+		gameOverItems.add(SpriteManager.getInstance().IMAGE_MAINMENUBUTTON);
 	}
 
 	@Override
@@ -65,9 +65,7 @@ public class GameOverView implements PanelView{
 			if(i == currentItem) {
 				g.drawImage(SpriteManager.getInstance().IMAGE_MENUHIGHLIGHT,
 						GameFrame.SCREENSIZE.width/2 - gameOverItems.get(0).getWidth(null)/2 - 60,
-						SpriteManager.getInstance().IMAGE_LOGO.getHeight(null) + 30 + (item.getHeight(null)+20)*i,
-						50 , 50*69/76 ,
-						null); 
+						SpriteManager.getInstance().IMAGE_LOGO.getHeight(null) + 30 + (item.getHeight(null)+20)*i,	null); 
 			}
 		}
 	}
@@ -99,7 +97,7 @@ public class GameOverView implements PanelView{
 			if(getItem() == SUBMITSCORE){
 				parentPanel.switchState(GamePanel.HIGHSCORE_STATE);
 			}
-			else if(getItem() == PLAYAGAIN){
+			else if(getItem() == RESTART){
 				parentPanel.switchState(GamePanel.GAME_STATE);
 			}
 			else if(getItem() == MAINMENU){
@@ -144,7 +142,7 @@ public class GameOverView implements PanelView{
 	 * Get current menu item 
 	 * @return
 	 */
-	public int getItem() {
+	private int getItem() {
 		return currentItem;
 	}
 	

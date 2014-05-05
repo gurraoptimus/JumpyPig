@@ -19,8 +19,8 @@ public class ObjectManager {
 	private int MAX_PLATFORM_RANGE_Y;
 	
 	private final int PLATFORM_ORDINARY = 0;
-	private final int PLATFORM_OF_DEATH = 1;
-	private final int PLATFORM_BLOCK = 2;
+	private final int PLATFORM_BLOCK = 1;
+	private final int PLATFORM_OF_DEATH = 2;
 	private final int PLATFORM_ELEVATOR = 3; //TODO
 	
 	private ArrayList<GameObject> platforms;
@@ -31,7 +31,7 @@ public class ObjectManager {
 	
 	public ObjectManager() {
 		//INIT.
-		LEVEL = 1;
+		LEVEL = 0;
 		NUMBER_OF_PLATFORMS = 5;
 		PLATFORM_SPEED = 5;
 		NUMBER_OF_CLOUDS = 5;
@@ -60,12 +60,16 @@ public class ObjectManager {
 	public void setMaxCloudRange(int n) {
 		MAX_CLOUD_RANGE = n;
 	}
+	
+	public void setLevel(int n) {
+		LEVEL = n;
+	}
 
 	/**
 	 * Add start objects
 	 */
 	public void initObjects() {
-		platforms.add(new Platform(0, 100, 20));
+		platforms.add(new Platform(0, GameFrame.SCREENSIZE.height - 200, 20));
 	}
 	
 	/**
@@ -82,14 +86,17 @@ public class ObjectManager {
 				Platform prevPlatform = (Platform) platforms.get(platforms.size()-1);
 				
 				//Generate platform type
-				int platformType = rand.nextInt(2);
+				int platformType = rand.nextInt(LEVEL+1);
 				int posX = prevPlatform.getX() + prevPlatform.getWidth() + 40 + rand.nextInt(350);
-				int posY = prevPlatform.getY() - 150 + rand.nextInt(300);
+				int posY = prevPlatform.getY() - 200 + rand.nextInt(400);
 				//Correct if not visible
-				if(posY >= GameFrame.SCREENSIZE.height) {
-					posY = GameFrame.SCREENSIZE.height - 20;
-				}else if(posY <= 0) {
-					posY = 120;
+				
+				if(posY + 40 >= GameFrame.SCREENSIZE.height) {
+					posY = GameFrame.SCREENSIZE.height - 100;
+				}
+				//Lower limit
+				else if(posY <= 10) {
+					posY = 40;
 				}
 				int length = 1 + rand.nextInt(8);
 				
@@ -100,9 +107,10 @@ public class ObjectManager {
 				}
 				//Platform of death
 				else if(platformType == PLATFORM_OF_DEATH) {
-					Platform p = new PlatformOfDeath(posX, posY, length);
+					
+					Platform p = new PlatformBlock(posX, posY, length);
 					platforms.add(p);
-					p = new PlatformBlock(posX + 40, posY - 100, length);
+					p = new PlatformOfDeath(posX - 40, posY + 100, length);
 					platforms.add(p);
 				}
 				//Platform block

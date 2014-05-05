@@ -65,9 +65,7 @@ public class MenuView implements PanelView {
 			if(i == currentItem) {
 				g.drawImage(SpriteManager.getInstance().IMAGE_MENUHIGHLIGHT,
 						GameFrame.SCREENSIZE.width/2 - menuItems.get(0).getWidth(null)/2 - 60,
-						SpriteManager.getInstance().IMAGE_LOGO.getHeight(null) + 30 + (item.getHeight(null)+20)*i,
-						50 , 50*69/76 ,
-						null); 
+						SpriteManager.getInstance().IMAGE_LOGO.getHeight(null) + 30 + (item.getHeight(null)+20)*i,	null); 
 			}
 			
 		}
