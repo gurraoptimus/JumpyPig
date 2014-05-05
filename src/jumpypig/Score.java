@@ -1,7 +1,10 @@
 package jumpypig;
 
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics2D;
+import java.io.IOException;
 
 public class Score {
 	
@@ -13,10 +16,23 @@ public class Score {
 	private long currentInterval;
 	private long startingTime;
 	
+	private Font font;
+	
 	public Score(){
 		score = 0;
 		currentInterval = STANDARD_INTERVAL;
 		startingTime = System.currentTimeMillis();
+		
+		//Load in font
+		try {
+			font = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream("/BALLOON.TTF"));
+			font = font.deriveFont(30f);
+		} catch (FontFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//END font
 	}
 	
 	public void update(){
@@ -27,8 +43,11 @@ public class Score {
 	}
 	
 	public void paint(Graphics2D g){
-		g.setFont(new Font("serif", Font.PLAIN, 15));
-		g.drawString("Score: " + score, 550, 50);
+		String scoreStr = "Score: " + score;
+		g.setPaint(new Color(215,122,178));
+		g.setFont(font);
+		g.drawString(scoreStr,(int) (GameFrame.SCREENSIZE.width - g.getFontMetrics(font).getStringBounds(scoreStr, g).getWidth() - 40),
+				50);
 	}
 
 	public void setInterval(){
