@@ -18,6 +18,11 @@ public class ObjectManager {
 	private int MAX_PLATFORM_RANGE_X;
 	private int MAX_PLATFORM_RANGE_Y;
 	
+	private final int PLATFORM_ORDINARY = 0;
+	private final int PLATFORM_OF_DEATH = 1;
+	private final int PLATFORM_BLOCK = 2;
+	private final int PLATFORM_ELEVATOR = 3; //TODO
+	
 	private ArrayList<GameObject> platforms;
 	private ArrayList<GameObject> clouds;
 	
@@ -73,16 +78,43 @@ public class ObjectManager {
 			
 			//ADD MISSING OBJECTS
 			for(int i=0;i<add;i++) {
+				//Previous platform
 				Platform prevPlatform = (Platform) platforms.get(platforms.size()-1);
-				//ADD PLATFORM AFTER LAST ONE
-				Platform p = new Platform(prevPlatform.getX() + prevPlatform.getWidth() + 40 + rand.nextInt(300),
-						prevPlatform.getY() - 100 + rand.nextInt(200),
-						1+rand.nextInt(7));
-				platforms.add(p);
+				
+				//Generate platform type
+				int platformType = rand.nextInt(2);
+				int posX = prevPlatform.getX() + prevPlatform.getWidth() + 40 + rand.nextInt(350);
+				int posY = prevPlatform.getY() - 150 + rand.nextInt(300);
+				//Correct if not visible
+				if(posY >= GameFrame.SCREENSIZE.height) {
+					posY = GameFrame.SCREENSIZE.height - 20;
+				}else if(posY <= 0) {
+					posY = 120;
+				}
+				int length = 1 + rand.nextInt(8);
+				
+				//Ordinary platform
+				if(platformType == PLATFORM_ORDINARY) {
+					Platform p = new Platform(posX, posY, length);
+					platforms.add(p);
+				}
+				//Platform of death
+				else if(platformType == PLATFORM_OF_DEATH) {
+					Platform p = new PlatformOfDeath(posX, posY, length);
+					platforms.add(p);
+					p = new PlatformBlock(posX + 40, posY - 100, length);
+					platforms.add(p);
+				}
+				//Platform block
+				else if(platformType == PLATFORM_BLOCK) {
+					Platform p = new PlatformBlock(posX, posY, length);
+					platforms.add(p);
+				}
 				
 			}
 			
 		}
+		//END PLATFORMS
 		
 		//CHECK CLOUDS
 		if(NUMBER_OF_CLOUDS > clouds.size()) {
