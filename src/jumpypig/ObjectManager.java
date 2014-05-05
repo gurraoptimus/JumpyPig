@@ -65,7 +65,7 @@ public class ObjectManager {
 	 * Add start objects
 	 */
 	public void initObjects() {
-		platforms.add(new Platform(0, 200, 20));
+		platforms.add(new Platform(0, 100, 20));
 	}
 	
 	/**

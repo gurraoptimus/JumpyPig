@@ -76,7 +76,7 @@ public class PlatformBlock extends Platform {
 	}
 	
 	private Rectangle getStandingRect() {
-		return new Rectangle(super.getX(), super.getY(), getWidth(), 10);
+		return new Rectangle(super.getX()-5, super.getY(), getWidth()+10, 10);
 	}
 	
 	@Override
