@@ -1,7 +1,10 @@
 package jumpypig;
 
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class GameView implements PanelView {
@@ -16,6 +19,56 @@ public class GameView implements PanelView {
 	private PauseMenu pausemenu;
 	private Score score;
 	private int STATE;
+	private ArrayList<MountainBackground> backgrounds;
+	
+	
+	
+	
+	//MOUNTAIN BACKGROUND
+	/**
+	 * Use this to loop mountain background
+	 */
+	private class MountainBackground {
+		private static final float SPEED = 0.5f;
+		private static final int POSY = 100;
+		private float posX;
+		public MountainBackground(int x) {
+			posX = x;
+		}
+		
+		/**
+		 * Is background inside frame
+		 * @return
+		 */
+		public boolean isVisible() {
+			//Check if outside frame
+			if(posX + getWidth() < 0) {
+				return false;
+			}
+			return true;
+		}
+		
+		public void update() {
+			posX -= SPEED;
+		}
+		
+		public void paint(Graphics2D g) {
+			g.drawImage(SpriteManager.getInstance().IMAGE_BACKGROUNDMOUNTAIN,(int) posX, POSY, null);
+		}
+		
+		public int getWidth() {
+			return SpriteManager.getInstance().IMAGE_BACKGROUNDMOUNTAIN.getWidth(null);
+		}
+		
+		public int getHeight() {
+			return SpriteManager.getInstance().IMAGE_BACKGROUNDMOUNTAIN.getHeight(null);
+		}
+	}
+	//END MOUNTAIN BACKGROUND
+	
+	
+	
+	
 	
 	public GameView(GamePanel parent) {
 		//INIT.
@@ -25,6 +78,10 @@ public class GameView implements PanelView {
 		score = new Score();
 		
 		parentPanel = parent;
+		
+		//Add background
+		backgrounds = new ArrayList<MountainBackground>();
+		backgrounds.add(new MountainBackground(0));
 		
 		STATE = GAME_STATE;
 	}
@@ -42,6 +99,13 @@ public class GameView implements PanelView {
 	public void paint(Graphics2D g) {
 		//Paint background
 		g.drawImage(SpriteManager.getInstance().IMAGE_BACKGROUND,0,0,null);
+		
+		//Paint mountain backgrounds
+		for(int i=0;i<backgrounds.size();i++) {
+			backgrounds.get(i).paint(g);
+		}
+		//Backgrounds
+		
 		//Paint objects
 		obm.paint(g);
 		//Paint player
@@ -63,6 +127,24 @@ public class GameView implements PanelView {
 			obm.update(this);
 			player.update(this);
 			score.update();
+			
+			//Update mountain background
+			Iterator<MountainBackground> it = backgrounds.iterator();
+			while(it.hasNext()) {
+				MountainBackground bg = it.next();
+				
+				if(!bg.isVisible()) {
+					it.remove();
+				}else{
+					bg.update();
+				}
+			}
+			if(backgrounds.size() < 2) {
+				//Add new background behind last one
+				backgrounds.add(new MountainBackground(backgrounds.get(backgrounds.size()-1).getWidth()));
+			}
+			//End backgrounds
+			
 		}
 	}
 

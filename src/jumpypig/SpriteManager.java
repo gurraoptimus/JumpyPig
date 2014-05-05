@@ -23,6 +23,7 @@ public final class SpriteManager {
 		private final String IMG_URL_EXITBUTTON = "/menu_btn_exit.png";
 		private final String IMG_URL_MENUHIGHLIGHT = "/Sprites/pig_jumping_4.png";
 		private final String IMG_URL_PLATFORMOFDEATH = "/Sprites/platform_of_death.png";
+		private final String IMG_URL_BACKGROUNDMOUNTAIN = "/background_mountain.png";
 		
 		//SPRITES IMAGES
 		public final Image IMAGE_PLATFORMBLOCK;
@@ -39,6 +40,7 @@ public final class SpriteManager {
 		public final Image IMAGE_EXITBUTTON;
 		public final Image IMAGE_MENUHIGHLIGHT;
 		public final Image IMAGE_PLATFORMOFDEATH;
+		public final Image IMAGE_BACKGROUNDMOUNTAIN;
 		
 		private SpriteManager() {
 			//INIT.
@@ -56,6 +58,7 @@ public final class SpriteManager {
 			IMAGE_EXITBUTTON = new ImageIcon(this.getClass().getResource(IMG_URL_EXITBUTTON)).getImage();
 			IMAGE_MENUHIGHLIGHT = new ImageIcon(this.getClass().getResource(IMG_URL_MENUHIGHLIGHT)).getImage();
 			IMAGE_PLATFORMOFDEATH = new ImageIcon(this.getClass().getResource(IMG_URL_PLATFORMOFDEATH)).getImage();
+			IMAGE_BACKGROUNDMOUNTAIN = new ImageIcon(this.getClass().getResource(IMG_URL_BACKGROUNDMOUNTAIN)).getImage();
 		}
 		
 		public static SpriteManager getInstance() {

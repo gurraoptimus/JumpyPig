@@ -119,6 +119,10 @@ public class Player {
 
 		//POSITION
 		dy -= GRAVITY;
+		//Fix max gravity
+		if( dy < -10 ) {
+			dy = -10;
+		}
 		if(STATE != STANDING_STATE) {
 			posY -= dy;
 		}
