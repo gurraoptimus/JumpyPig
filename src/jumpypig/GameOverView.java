@@ -197,8 +197,8 @@ public class GameOverView implements PanelView{
 	}
 	
 	public void setScore(long n){
-		finishScore = n;
 		score = 0;
+		finishScore = n;
 	}
 	
 	
