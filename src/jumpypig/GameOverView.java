@@ -126,7 +126,7 @@ public class GameOverView implements PanelView{
 			if(i == currentItem) {
 				g.drawImage(SpriteManager.getInstance().IMAGE_MENUHIGHLIGHT,
 						GameFrame.SCREENSIZE.width/2 - gameOverItems.get(0).getWidth(null)/2 - 50,
-						SpriteManager.getInstance().IMAGE_LOGO.getHeight(null) + 75 + (item.getHeight(null)+20)*i,	null); 
+						SpriteManager.getInstance().IMAGE_LOGO.getHeight(null) + 80 + (item.getHeight(null)+20)*i,	null); 
 			}
 		}
 	}
