@@ -98,6 +98,7 @@ public class MenuView implements PanelView {
 			}
 			else if(getItem() == HIGHSCORE){
 				parentPanel.switchState(GamePanel.HIGHSCORE_STATE);
+				((HighscoreView) parentPanel.getCurrentState()).updateHighscores();
 			}
 			else if(getItem() == EXIT){
 				System.exit(0);

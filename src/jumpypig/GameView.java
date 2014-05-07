@@ -155,6 +155,7 @@ public class GameView implements PanelView {
 			if(player.isDead()) {
 				//Reset view in case player wants to play again
 				restart();
+				//TODO set score
 				//Switch view
 				parentPanel.switchState(GamePanel.GAMEOVER_STATE);
 			}
@@ -218,6 +219,8 @@ public class GameView implements PanelView {
 				}
 				
 				else if(pausemenu.getItem() == PauseMenu.MAINMENU) {
+					unpause();
+					restart();
 					parentPanel.switchState(GamePanel.MENU_STATE);
 				}
 			}

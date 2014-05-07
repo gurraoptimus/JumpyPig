@@ -41,7 +41,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable {
 
 	}
 	
-	private PanelView getCurrentState() {
+	public PanelView getCurrentState() {
 		return states.get(currentState);
 	}
 	
