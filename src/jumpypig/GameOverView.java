@@ -8,6 +8,10 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 public class GameOverView implements PanelView{
@@ -34,7 +38,7 @@ public class GameOverView implements PanelView{
 	private final Dimension size = GameFrame.SCREENSIZE;
 	private int posX,posY;
 	
-	private String nameStr = "Name: ";
+	private String nameStr = "";
 	private String typeStr = " ";
 	
 	// Timer for _
@@ -61,25 +65,16 @@ public class GameOverView implements PanelView{
 		gameOverItems.add(SpriteManager.getInstance().IMAGE_MAINMENUBUTTON);
 		
 		//Load in font
-			try {
-				font = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream("/BALLOON.TTF"));
-				font = font.deriveFont(90f);
-			} catch (FontFormatException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		//END font
-			
-		//Load in font for name submission
-			try {
-				fontName = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream("/BALLOON.TTF"));
-				fontName = font.deriveFont(40f);
-			} catch (FontFormatException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		try {
+			font = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream("/BALLOON.TTF"));
+		} catch (FontFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//Set sizes
+		font = font.deriveFont(90f);
+		fontName = font.deriveFont(40f);
 		//END font
 			
 			currentInterval = 1000;
@@ -111,7 +106,7 @@ public class GameOverView implements PanelView{
 		
 		// Paint name
 		g.setFont(fontName);
-		g.drawString(nameStr + typeStr, (int) (GameFrame.SCREENSIZE.width/2 - 140),
+		g.drawString("Name: " + nameStr + typeStr, (int) (GameFrame.SCREENSIZE.width/2 - 140),
 				GameFrame.SCREENSIZE.height/2 + 50);
 		
 		// Paint menu items
@@ -126,7 +121,7 @@ public class GameOverView implements PanelView{
 			if(i == currentItem) {
 				g.drawImage(SpriteManager.getInstance().IMAGE_MENUHIGHLIGHT,
 						GameFrame.SCREENSIZE.width/2 - gameOverItems.get(0).getWidth(null)/2 - 50,
-						SpriteManager.getInstance().IMAGE_LOGO.getHeight(null) + 75 + (item.getHeight(null)+20)*i,	null); 
+						SpriteManager.getInstance().IMAGE_LOGO.getHeight(null) + 80 + (item.getHeight(null)+20)*i,	null); 
 			}
 		}
 	}
@@ -134,12 +129,16 @@ public class GameOverView implements PanelView{
 	@Override
 	public void update() {
 		obm.update(this);
+		//Update score
 		if(score < finishScore){
 			score++;
 		}
 		else{
 			score = finishScore;
 		}
+		//End blink
+		
+		//blink "_"
 		if(currentInterval < (System.currentTimeMillis() - startingTime)){
 			startingTime = System.currentTimeMillis();
 			if(typeStr == " "){
@@ -149,6 +148,7 @@ public class GameOverView implements PanelView{
 				typeStr = " ";
 			}
 		}
+		//end blink
 	}
 
 	@Override
@@ -170,7 +170,11 @@ public class GameOverView implements PanelView{
 		// Activate item
 		else if(k == KeyEvent.VK_ENTER){
 			if(getItem() == SUBMITSCORE){
+				//Submit highscore
+				submitHighscore();
 				parentPanel.switchState(GamePanel.HIGHSCORE_STATE);
+				//update highscores
+				((HighscoreView) parentPanel.getCurrentState()).updateHighscores();
 			}
 			else if(getItem() == RESTART){
 				parentPanel.switchState(GamePanel.GAME_STATE);
@@ -182,9 +186,16 @@ public class GameOverView implements PanelView{
 			currentItem = 0;
 		}
 		// Type name
-		if(k >= KeyEvent.VK_A && k <= KeyEvent.VK_Z || k >= KeyEvent.VK_0 && k <= KeyEvent.VK_9){
+		else if(k >= KeyEvent.VK_A && k <= KeyEvent.VK_Z || k >= KeyEvent.VK_0 && k <= KeyEvent.VK_9){
 			nameStr += KeyEvent.getKeyText(k);
 		}
+		//backspace
+		else if(k == KeyEvent.VK_BACK_SPACE) {
+			if(nameStr.length() > 0) {
+				nameStr = nameStr.substring(0, nameStr.length()-1);
+			}
+		}
+		
 		
 	}
 
@@ -239,6 +250,24 @@ public class GameOverView implements PanelView{
 	public void setScore(long n){
 		score = 0;
 		finishScore = n;
+	}
+	
+	private void submitHighscore() {
+		try {
+			//OPEN CONNECTION
+			URL site = new URL("http://home.arnflo.se/JumpyPig/highscore.php");
+			URLConnection conn = site.openConnection();
+			conn.setDoOutput(true);
+			//WRITE TO CONNECTION
+			OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+			writer.write("name="+nameStr+"&score="+score);
+			writer.close();
+			//POST
+			conn.getInputStream();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	

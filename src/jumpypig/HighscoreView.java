@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.awt.geom.AffineTransform;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -194,15 +193,17 @@ public class HighscoreView implements PanelView {
 			public void run() {
 				highscores.clear();
 				try {
-					URL site = new URL("http://192.168.1.16/JumpyPig/highscore.php?highscore=1");
+					URL site = new URL("http://home.arnflo.se/JumpyPig/highscore.php?highscore=1");
 					BufferedReader data = new BufferedReader(new InputStreamReader(site.openStream()));
 					
 					//Iterate through resonse and load in highscores
 					String response = data.readLine();
 					//response = "Player1:500;Player2:300;Player3:100 etc"
-					for(String res : response.split(";")) {
-						String[] highscore = res.split(":");
-						highscores.add(new HighscoreEntry(highscore[0], Integer.parseInt(highscore[1])));
+					if(response != null) {
+						for(String res : response.split(";")) {
+							String[] highscore = res.split(":");
+							highscores.add(new HighscoreEntry(highscore[0], Integer.parseInt(highscore[1])));
+						}
 					}
 					
 				} catch (MalformedURLException e) {

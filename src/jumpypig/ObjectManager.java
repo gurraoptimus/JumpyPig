@@ -2,7 +2,6 @@ package jumpypig;
 
 
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -15,8 +14,6 @@ public class ObjectManager {
 	private int LEVEL;
 	
 	private int MAX_CLOUD_RANGE;
-	private int MAX_PLATFORM_RANGE_X;
-	private int MAX_PLATFORM_RANGE_Y;
 	
 	private final int PLATFORM_ORDINARY = 0;
 	private final int PLATFORM_BLOCK = 2;
@@ -36,8 +33,7 @@ public class ObjectManager {
 		PLATFORM_SPEED = 5;
 		NUMBER_OF_CLOUDS = 5;
 		MAX_CLOUD_RANGE = GameFrame.SCREENSIZE.height/3;
-		MAX_PLATFORM_RANGE_X = 300;
-		MAX_PLATFORM_RANGE_Y = GameFrame.SCREENSIZE.height/2;
+		
 		
 		platforms = new ArrayList<GameObject>();
 		clouds = new ArrayList<GameObject>();
