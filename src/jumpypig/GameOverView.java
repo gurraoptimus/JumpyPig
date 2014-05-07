@@ -25,7 +25,7 @@ public class GameOverView implements PanelView{
 	private int currentItem;
 	
 	private long score = 0;
-	private long finishScore = 1000;
+	private long finishScore = 0;
 	
 	private Font font;
 	
@@ -198,6 +198,7 @@ public class GameOverView implements PanelView{
 	
 	public void setScore(long n){
 		finishScore = n;
+		score = 0;
 	}
 	
 	
