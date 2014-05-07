@@ -54,7 +54,7 @@ public class Platform implements GameObject{
 	}
 	
 	/**
-	 * Get width of platform in pixels. Only use in constructor. Causing ConcurrencyException otherwise :S
+	 * Get width of platform in pixels.
 	 * @return
 	 */
 	private int getPixelWidth() {
@@ -65,7 +65,7 @@ public class Platform implements GameObject{
 	}
 	
 	/**
-	 * Get height of platform in pixels. Only use in constructor. Causing ConcurrencyException otherwise :S
+	 * Get height of platform in pixels.
 	 * @return
 	 */
 	private int getPixelHeight() {
@@ -97,7 +97,7 @@ public class Platform implements GameObject{
 	 */
 	public void collidePlayer(Player player) {
 		//Set pos
-		player.setY(getY() - player.getHeight()+1);
+		player.setY(getY() - player.getHeight());
 		//Set standing
 		player.stand();
 	}

@@ -13,7 +13,7 @@ public class GameView implements PanelView {
 	private final int PAUSE_STATE = 1;
 	
 	//LEVELS
-	private final int[] LEVEL_LIMITS = new int[]{30,70,100};
+	private final int[] LEVEL_LIMITS = new int[]{0,5,10};
 	
 	
 	private Player player;

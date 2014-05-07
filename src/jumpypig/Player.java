@@ -168,7 +168,7 @@ public class Player {
 	public void jump() {
 		if(STATE == STANDING_STATE) {
 			posY -= getJumpRect().height+1;
-			dy = 13;
+			dy = 15;
 			STATE = JUMPING_STATE;
 
 			//ANIMATION

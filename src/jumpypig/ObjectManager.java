@@ -19,9 +19,9 @@ public class ObjectManager {
 	private int MAX_PLATFORM_RANGE_Y;
 	
 	private final int PLATFORM_ORDINARY = 0;
-	private final int PLATFORM_BLOCK = 1;
-	private final int PLATFORM_OF_DEATH = 2;
-	private final int PLATFORM_ELEVATOR = 3; //TODO
+	private final int PLATFORM_BLOCK = 2;
+	private final int PLATFORM_OF_DEATH = 3;
+	private final int PLATFORM_ELEVATOR = 1;
 	
 	private ArrayList<GameObject> platforms;
 	private ArrayList<GameObject> clouds;
@@ -87,7 +87,7 @@ public class ObjectManager {
 				
 				//Generate platform type
 				int platformType = rand.nextInt(LEVEL+1);
-				int posX = prevPlatform.getX() + prevPlatform.getWidth() + 40 + rand.nextInt(350);
+				int posX = prevPlatform.getX() + prevPlatform.getWidth() + 40 + rand.nextInt(300);
 				int posY = prevPlatform.getY() - 200 + rand.nextInt(400);
 				//Correct if not visible
 				
@@ -116,6 +116,11 @@ public class ObjectManager {
 				//Platform block
 				else if(platformType == PLATFORM_BLOCK) {
 					Platform p = new PlatformBlock(posX, posY, length);
+					platforms.add(p);
+				}
+				//Platform elevator
+				else if(platformType == PLATFORM_ELEVATOR) {
+					Platform p = new PlatformElevator(posX, posY, length);
 					platforms.add(p);
 				}
 				
