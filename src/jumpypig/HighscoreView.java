@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -135,7 +136,12 @@ public class HighscoreView implements PanelView {
 		//Print main menu button
 		g.drawImage(SpriteManager.getInstance().IMAGE_MAINMENUBUTTON,
 				GameFrame.SCREENSIZE.width/2 - SpriteManager.getInstance().IMAGE_MAINMENUBUTTON.getWidth(null)/2,
-				GameFrame.SCREENSIZE.height - 48,
+				GameFrame.SCREENSIZE.height - 90,
+				null);
+		
+		g.drawImage(SpriteManager.getInstance().IMAGE_MENUHIGHLIGHT,
+				GameFrame.SCREENSIZE.width/2 - SpriteManager.getInstance().IMAGE_MAINMENUBUTTON.getWidth(null)/2 - SpriteManager.getInstance().IMAGE_MENUHIGHLIGHT.getWidth(null) - 10,
+				GameFrame.SCREENSIZE.height - 95,
 				null);
 		
 		
@@ -154,8 +160,9 @@ public class HighscoreView implements PanelView {
 
 	@Override
 	public void keyReleased(int k) {
-		// TODO Auto-generated method stub
-
+		if(k == KeyEvent.VK_ENTER) {
+			parentPanel.switchState(GamePanel.MENU_STATE);
+		}
 	}
 
 	@Override
