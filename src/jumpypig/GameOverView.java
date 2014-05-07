@@ -35,6 +35,11 @@ public class GameOverView implements PanelView{
 	private int posX,posY;
 	
 	private String nameStr = "Name: ";
+	private String typeStr = " ";
+	
+	// Timer for _
+	private long currentInterval;
+	private long startingTime;
 	
 	public GameOverView(GamePanel parent){
 		//Set parent panel
@@ -76,6 +81,9 @@ public class GameOverView implements PanelView{
 				e.printStackTrace();
 			}
 		//END font
+			
+			currentInterval = 1000;
+			startingTime = System.currentTimeMillis();
 	}
 
 	@Override
@@ -95,23 +103,15 @@ public class GameOverView implements PanelView{
 		String scoreStr = "" + score;
 		g.setPaint(new Color(215,122,178));
 		g.setFont(font);
-		// Print from 0 up to current score
-		if(score <= finishScore){
-			g.drawString(scoreStr, (int) (GameFrame.SCREENSIZE.width/2 - g.getFontMetrics(font).getStringBounds(scoreStr, g).getWidth()/2),
-				GameFrame.SCREENSIZE.height/2 + 10);
-		}
-		// Stop at finished score
-		if(score > finishScore){
-			scoreStr = "" + finishScore;
-			g.drawString(scoreStr, (int) (GameFrame.SCREENSIZE.width/2 - g.getFontMetrics(font).getStringBounds(scoreStr, g).getWidth()/2),
-				GameFrame.SCREENSIZE.height/2 + 10);
-		}
-		//END score
 		
-		//TODO: Limit keystrokes to a-z, 0-9
+		// Print from 0 up to current score
+		g.drawString(scoreStr, (int) (GameFrame.SCREENSIZE.width/2 - g.getFontMetrics(font).getStringBounds(scoreStr, g).getWidth()/2),
+				GameFrame.SCREENSIZE.height/2 + 10);
+		
+		
 		// Paint name
 		g.setFont(fontName);
-		g.drawString(nameStr, (int) (GameFrame.SCREENSIZE.width/2 - 140),
+		g.drawString(nameStr + typeStr, (int) (GameFrame.SCREENSIZE.width/2 - 140),
 				GameFrame.SCREENSIZE.height/2 + 50);
 		
 		// Paint menu items
@@ -134,7 +134,21 @@ public class GameOverView implements PanelView{
 	@Override
 	public void update() {
 		obm.update(this);
-		score++;
+		if(score < finishScore){
+			score++;
+		}
+		else{
+			score = finishScore;
+		}
+		if(currentInterval < (System.currentTimeMillis() - startingTime)){
+			startingTime = System.currentTimeMillis();
+			if(typeStr == " "){
+				typeStr = "_";
+			}
+			else{
+				typeStr = " ";
+			}
+		}
 	}
 
 	@Override
@@ -168,7 +182,9 @@ public class GameOverView implements PanelView{
 			currentItem = 0;
 		}
 		// Type name
-		nameStr += KeyEvent.getKeyText(k);
+		if(k >= KeyEvent.VK_A && k <= KeyEvent.VK_Z || k >= KeyEvent.VK_0 && k <= KeyEvent.VK_9){
+			nameStr += KeyEvent.getKeyText(k);
+		}
 		
 	}
 
