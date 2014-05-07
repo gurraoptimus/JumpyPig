@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -130,6 +131,13 @@ public class HighscoreView implements PanelView {
 			}
 			
 		}
+		
+		//Print main menu button
+		g.drawImage(SpriteManager.getInstance().IMAGE_MAINMENUBUTTON,
+				GameFrame.SCREENSIZE.width/2 - SpriteManager.getInstance().IMAGE_MAINMENUBUTTON.getWidth(null)/2,
+				GameFrame.SCREENSIZE.height - 48,
+				null);
+		
 		
 	}
 

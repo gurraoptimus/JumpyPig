@@ -16,6 +16,7 @@ public class GameFrame extends JFrame {
 		setTitle("Jumpy Pig");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(SCREENSIZE.width,SCREENSIZE.height);
+		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setResizable(false);

@@ -29,6 +29,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable {
 		
 		//INIT.
 		setBackground(Color.black);
+		setPreferredSize(GameFrame.SCREENSIZE);
 		setDoubleBuffered(true);
 		setFocusable(true);
 		
