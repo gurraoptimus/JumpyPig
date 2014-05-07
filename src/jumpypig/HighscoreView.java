@@ -177,6 +177,7 @@ public class HighscoreView implements PanelView {
 			
 			@Override
 			public void run() {
+				highscores.clear();
 				try {
 					URL site = new URL("http://192.168.1.16/JumpyPig/highscore.php?highscore=1");
 					BufferedReader data = new BufferedReader(new InputStreamReader(site.openStream()));

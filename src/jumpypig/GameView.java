@@ -153,11 +153,12 @@ public class GameView implements PanelView {
 			
 			//Check if player died - change view to game over
 			if(player.isDead()) {
-				//Reset view in case player wants to play again
-				restart();
-				//TODO set score
 				//Switch view
 				parentPanel.switchState(GamePanel.GAMEOVER_STATE);
+				//Set score
+				((GameOverView) parentPanel.getCurrentState()).setScore(score.getScore());
+				//Reset view in case player wants to play again
+				restart();
 			}
 			//end player
 			
