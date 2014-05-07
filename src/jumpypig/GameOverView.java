@@ -28,10 +28,13 @@ public class GameOverView implements PanelView{
 	private long finishScore = 0;
 	
 	private Font font;
+	private Font fontName;
 	
 	// Size
 	private final Dimension size = GameFrame.SCREENSIZE;
 	private int posX,posY;
+	
+	private String nameStr = "Name: ";
 	
 	public GameOverView(GamePanel parent){
 		//Set parent panel
@@ -62,6 +65,17 @@ public class GameOverView implements PanelView{
 				e.printStackTrace();
 			}
 		//END font
+			
+		//Load in font for name submission
+			try {
+				fontName = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream("/BALLOON.TTF"));
+				fontName = font.deriveFont(40f);
+			} catch (FontFormatException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		//END font
 	}
 
 	@Override
@@ -84,28 +98,35 @@ public class GameOverView implements PanelView{
 		// Print from 0 up to current score
 		if(score <= finishScore){
 			g.drawString(scoreStr, (int) (GameFrame.SCREENSIZE.width/2 - g.getFontMetrics(font).getStringBounds(scoreStr, g).getWidth()/2),
-				GameFrame.SCREENSIZE.height/2 + 15);
+				GameFrame.SCREENSIZE.height/2 + 10);
 		}
 		// Stop at finished score
 		if(score > finishScore){
 			scoreStr = "" + finishScore;
 			g.drawString(scoreStr, (int) (GameFrame.SCREENSIZE.width/2 - g.getFontMetrics(font).getStringBounds(scoreStr, g).getWidth()/2),
-				GameFrame.SCREENSIZE.height/2 + 15);
+				GameFrame.SCREENSIZE.height/2 + 10);
 		}
+		//END score
+		
+		//TODO: Limit keystrokes to a-z, 0-9
+		// Paint name
+		g.setFont(fontName);
+		g.drawString(nameStr, (int) (GameFrame.SCREENSIZE.width/2 - 140),
+				GameFrame.SCREENSIZE.height/2 + 50);
 		
 		// Paint menu items
 		for(int i=0;i<gameOverItems.size();i++) {
 			// Paint item
 			Image item = gameOverItems.get(i);
 			g.drawImage(item, GameFrame.SCREENSIZE.width/2 - gameOverItems.get(0).getWidth(null)/2 + 10,
-					SpriteManager.getInstance().IMAGE_LOGO.getHeight(null) + 60 + (item.getHeight(null)+20)*i,
+					SpriteManager.getInstance().IMAGE_LOGO.getHeight(null) + 90 + (item.getHeight(null)+20)*i,
 					null);
 			
 			//If item is chosen paint pig
 			if(i == currentItem) {
 				g.drawImage(SpriteManager.getInstance().IMAGE_MENUHIGHLIGHT,
 						GameFrame.SCREENSIZE.width/2 - gameOverItems.get(0).getWidth(null)/2 - 50,
-						SpriteManager.getInstance().IMAGE_LOGO.getHeight(null) + 50 + (item.getHeight(null)+20)*i,	null); 
+						SpriteManager.getInstance().IMAGE_LOGO.getHeight(null) + 75 + (item.getHeight(null)+20)*i,	null); 
 			}
 		}
 	}
@@ -141,10 +162,13 @@ public class GameOverView implements PanelView{
 				parentPanel.switchState(GamePanel.GAME_STATE);
 			}
 			else if(getItem() == MAINMENU){
-				parentPanel.switchState(GamePanel.MENU_STATE);;
+				parentPanel.switchState(GamePanel.MENU_STATE);
 			}
+			// Make default choice submit score
+			currentItem = 0;
 		}
-
+		// Type name
+		nameStr += KeyEvent.getKeyText(k);
 		
 	}
 
