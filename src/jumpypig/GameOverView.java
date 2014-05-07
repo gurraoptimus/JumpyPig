@@ -1,8 +1,13 @@
 package jumpypig;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GameOverView implements PanelView{
@@ -19,6 +24,14 @@ public class GameOverView implements PanelView{
 	// Current game over item
 	private int currentItem;
 	
+	private long score = 0;
+	private long finishScore = 1000;
+	
+	private Font font;
+	
+	// Size
+	private final Dimension size = GameFrame.SCREENSIZE;
+	private int posX,posY;
 	
 	public GameOverView(GamePanel parent){
 		//Set parent panel
@@ -38,6 +51,17 @@ public class GameOverView implements PanelView{
 		gameOverItems.add(SpriteManager.getInstance().IMAGE_SUBMITHIGHSCOREBUTTON);
 		gameOverItems.add(SpriteManager.getInstance().IMAGE_RESTARTBUTTON);
 		gameOverItems.add(SpriteManager.getInstance().IMAGE_MAINMENUBUTTON);
+		
+		//Load in font
+			try {
+				font = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream("/BALLOON.TTF"));
+				font = font.deriveFont(90f);
+			} catch (FontFormatException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		//END font
 	}
 
 	@Override
@@ -49,23 +73,39 @@ public class GameOverView implements PanelView{
 		obm.paint(g);
 		
 		// Paint logo
-		g.drawImage(SpriteManager.getInstance().IMAGE_LOGO, 
-				GameFrame.SCREENSIZE.width/2 - SpriteManager.getInstance().IMAGE_LOGO.getWidth(null)/2,
-				10,
-				null);
+		g.drawImage(SpriteManager.getInstance().IMAGE_LOGO,posX + size.width/2 - 300/2,
+				posY + 10, 300 ,
+				300*SpriteManager.getInstance().IMAGE_LOGO.getHeight(null)/SpriteManager.getInstance().IMAGE_LOGO.getWidth(null) , null);
+		
+		// Paint score
+		String scoreStr = "" + score;
+		g.setPaint(new Color(215,122,178));
+		g.setFont(font);
+		// Print from 0 up to current score
+		if(score <= finishScore){
+			g.drawString(scoreStr, (int) (GameFrame.SCREENSIZE.width/2 - g.getFontMetrics(font).getStringBounds(scoreStr, g).getWidth()/2),
+				GameFrame.SCREENSIZE.height/2 + 15);
+		}
+		// Stop at finished score
+		if(score > finishScore){
+			scoreStr = "" + finishScore;
+			g.drawString(scoreStr, (int) (GameFrame.SCREENSIZE.width/2 - g.getFontMetrics(font).getStringBounds(scoreStr, g).getWidth()/2),
+				GameFrame.SCREENSIZE.height/2 + 15);
+		}
+		
 		// Paint menu items
 		for(int i=0;i<gameOverItems.size();i++) {
 			// Paint item
 			Image item = gameOverItems.get(i);
-			g.drawImage(item, GameFrame.SCREENSIZE.width/2 - gameOverItems.get(0).getWidth(null)/2,
-					SpriteManager.getInstance().IMAGE_LOGO.getHeight(null) + 40 + (item.getHeight(null)+20)*i,
+			g.drawImage(item, GameFrame.SCREENSIZE.width/2 - gameOverItems.get(0).getWidth(null)/2 + 10,
+					SpriteManager.getInstance().IMAGE_LOGO.getHeight(null) + 60 + (item.getHeight(null)+20)*i,
 					null);
 			
 			//If item is chosen paint pig
 			if(i == currentItem) {
 				g.drawImage(SpriteManager.getInstance().IMAGE_MENUHIGHLIGHT,
-						GameFrame.SCREENSIZE.width/2 - gameOverItems.get(0).getWidth(null)/2 - 60,
-						SpriteManager.getInstance().IMAGE_LOGO.getHeight(null) + 30 + (item.getHeight(null)+20)*i,	null); 
+						GameFrame.SCREENSIZE.width/2 - gameOverItems.get(0).getWidth(null)/2 - 50,
+						SpriteManager.getInstance().IMAGE_LOGO.getHeight(null) + 50 + (item.getHeight(null)+20)*i,	null); 
 			}
 		}
 	}
@@ -73,7 +113,7 @@ public class GameOverView implements PanelView{
 	@Override
 	public void update() {
 		obm.update(this);
-		
+		score++;
 	}
 
 	@Override
@@ -154,6 +194,10 @@ public class GameOverView implements PanelView{
 	@Override
 	public int getWidth() {
 		return parentPanel.getWidth();
+	}
+	
+	public void setScore(long n){
+		finishScore = n;
 	}
 	
 	
