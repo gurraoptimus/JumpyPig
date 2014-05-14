@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements KeyListener,Runnable {
@@ -38,7 +39,12 @@ public class GamePanel extends JPanel implements KeyListener,Runnable {
 		states.add(new GameView(this));
 		states.add(new HighscoreView(this));
 		states.add(new GameOverView(this));
-
+		
+		
+		//TEST SOUND
+		SoundManager.getInstance().GAME_MUSIC.play();
+		SoundManager.getInstance().START_SOUND.play();
+		
 	}
 	
 	public PanelView getCurrentState() {
