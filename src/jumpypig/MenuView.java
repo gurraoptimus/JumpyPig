@@ -94,6 +94,8 @@ public class MenuView implements PanelView {
 		// Activate item
 		else if(k == KeyEvent.VK_ENTER){
 			if(getItem() == START){
+				//Play start sound
+				SoundManager.getInstance().START_SOUND.play();
 				parentPanel.switchState(GamePanel.GAME_STATE);
 			}
 			else if(getItem() == HIGHSCORE){

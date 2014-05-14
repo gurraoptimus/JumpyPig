@@ -41,9 +41,9 @@ public class GamePanel extends JPanel implements KeyListener,Runnable {
 		states.add(new GameOverView(this));
 		
 		
-		//TEST SOUND
+		//START MAIN SOUND
 		SoundManager.getInstance().GAME_MUSIC.play();
-		SoundManager.getInstance().START_SOUND.play();
+		
 		
 	}
 	

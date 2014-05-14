@@ -152,6 +152,12 @@ public class GameView implements PanelView {
 			
 			//Check if player died - change view to game over
 			if(player.isDead()) {
+				
+				//play dying sound if player hasn't exploded
+				if(!player.hasExploded()) {
+					SoundManager.getInstance().DIE_SOUND.play();
+				}
+				
 				//Switch view
 				parentPanel.switchState(GamePanel.GAMEOVER_STATE);
 				//Set score

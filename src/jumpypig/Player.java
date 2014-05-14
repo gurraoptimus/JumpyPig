@@ -16,6 +16,7 @@ public class Player {
 	private Animation currentAnimation,jumpAnimation,standingAnimation,explodeAnimation;
 	private int posX, posY;
 	private float dy, dx;
+	private boolean exploded;
 	
 	/**
 	 * Create new pig player at (x,y)
@@ -204,9 +205,15 @@ public class Player {
 	 */
 	public void explode() {
 		STATE = FALLING_STATE;
-		currentAnimation = explodeAnimation;
-		currentAnimation.reset();
-		
+		if(!exploded) {
+			currentAnimation = explodeAnimation;
+			currentAnimation.reset();
+			
+			//PLAY SPLAT SOUND
+			SoundManager.getInstance().SPLAT_SOUND.play();
+			
+			exploded = true;
+		}
 	}
 	
 	/**
@@ -234,5 +241,13 @@ public class Player {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Return if player has exploded or not
+	 * @return
+	 */
+	public boolean hasExploded() {
+		return exploded;
 	}
 }
